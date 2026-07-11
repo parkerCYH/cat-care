@@ -1,10 +1,12 @@
 import { PostApiV1CatCareCatsCatIdBowelMovementsBodyStoolType } from '@/api/generated/model';
+import type { GetApiV1CatCareCatsCatIdBowelMovements200ItemStoolType } from '@/api/generated/model';
 
 /**
  * `stoolType` Chinese label map (issue #6 resolution comment): the backend `stoolType`
  * enum is used as-is, no custom frontend enum — kept here so the home quick-record chip
- * picker and `/bowel/new` share one source of truth (and issue #7's bowel history page
- * can reuse it too for consistent labels).
+ * picker and `/bowel/new` share one source of truth, and issue #7's bowel history page
+ * (排便歷史規格) reuses it verbatim per its resolution comment ("形狀欄位沿用 #6 定案的中文對照表,
+ * 不重複定義").
  */
 export const STOOL_TYPE_LABELS: Record<PostApiV1CatCareCatsCatIdBowelMovementsBodyStoolType, string> = {
   normal: '正常',
@@ -18,3 +20,10 @@ export const STOOL_TYPE_LABELS: Record<PostApiV1CatCareCatsCatIdBowelMovementsBo
 export const STOOL_TYPE_OPTIONS = Object.values(
   PostApiV1CatCareCatsCatIdBowelMovementsBodyStoolType,
 ) as PostApiV1CatCareCatsCatIdBowelMovementsBodyStoolType[];
+
+export function formatStoolType(
+  stoolType: GetApiV1CatCareCatsCatIdBowelMovements200ItemStoolType | undefined,
+): string {
+  if (!stoolType) return '未記錄形狀';
+  return STOOL_TYPE_LABELS[stoolType] ?? stoolType;
+}

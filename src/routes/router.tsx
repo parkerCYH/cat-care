@@ -7,6 +7,10 @@ import { WeightNew } from '@/pages/WeightNew';
 import { Login } from '@/pages/Login';
 import { AuthCallback } from '@/pages/AuthCallback';
 import { NotFound } from '@/pages/NotFound';
+import { BowelCalendar } from '@/pages/bowel/BowelCalendar';
+import { BowelTable } from '@/pages/bowel/BowelTable';
+import { BowelDetail } from '@/pages/bowel/BowelDetail';
+import { BowelEdit } from '@/pages/bowel/BowelEdit';
 
 /**
  * Route shell for phase 0. Phase-1 feature agents (issues #6-#9) add their own routes
@@ -42,6 +46,24 @@ export const router = createBrowserRouter([
       {
         path: '/weight/new',
         element: <WeightNew />,
+      },
+      // Issue #7 (排便歷史規格): calendar is the default view, table is the filterable
+      // list view; both are top-level siblings, detail/edit are reached from within.
+      {
+        path: '/bowel/calendar',
+        element: <BowelCalendar />,
+      },
+      {
+        path: '/bowel/table',
+        element: <BowelTable />,
+      },
+      {
+        path: '/bowel/:id',
+        element: <BowelDetail />,
+      },
+      {
+        path: '/bowel/:id/edit',
+        element: <BowelEdit />,
       },
     ],
   },
