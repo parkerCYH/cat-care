@@ -2,6 +2,8 @@ import { createBrowserRouter } from 'react-router-dom';
 import { AppLayout } from '@/components/layout/AppLayout';
 import { ProtectedRoute } from './ProtectedRoute';
 import { Home } from '@/pages/Home';
+import { BowelNew } from '@/pages/BowelNew';
+import { WeightNew } from '@/pages/WeightNew';
 import { Login } from '@/pages/Login';
 import { AuthCallback } from '@/pages/AuthCallback';
 import { NotFound } from '@/pages/NotFound';
@@ -32,6 +34,14 @@ export const router = createBrowserRouter([
       {
         path: '/',
         element: <Home />,
+      },
+      {
+        path: '/bowel/new',
+        element: <BowelNew />,
+      },
+      {
+        path: '/weight/new',
+        element: <WeightNew />,
       },
     ],
   },
