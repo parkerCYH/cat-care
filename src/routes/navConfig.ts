@@ -15,4 +15,8 @@ export const navItems: NavItem[] = [
   // Calendar is the 預設 (default) view per issue #7's resolution — table, detail, and
   // edit are reached from within the calendar view rather than getting their own entries.
   { label: '排便歷史', path: '/bowel/calendar' },
+  // issue #8: /weight/chart is the spec's default landing page for this feature
+  // ("拆成 /weight/chart(預設)與 /weight/table"); /weight/table is reached from within
+  // the chart page, not the hamburger menu, to keep the menu to one entry per feature.
+  { label: '體重歷史', path: '/weight/chart' },
 ];

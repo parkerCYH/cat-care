@@ -11,6 +11,10 @@ import { BowelCalendar } from '@/pages/bowel/BowelCalendar';
 import { BowelTable } from '@/pages/bowel/BowelTable';
 import { BowelDetail } from '@/pages/bowel/BowelDetail';
 import { BowelEdit } from '@/pages/bowel/BowelEdit';
+import { WeightChartPage } from '@/pages/weight/WeightChartPage';
+import { WeightTablePage } from '@/pages/weight/WeightTablePage';
+import { WeightDetailPage } from '@/pages/weight/WeightDetailPage';
+import { WeightEditPage } from '@/pages/weight/WeightEditPage';
 
 /**
  * Route shell for phase 0. Phase-1 feature agents (issues #6-#9) add their own routes
@@ -64,6 +68,23 @@ export const router = createBrowserRouter([
       {
         path: '/bowel/:id/edit',
         element: <BowelEdit />,
+      },
+      // issue #8 — weight history (chart is the default entry point, table is secondary)
+      {
+        path: '/weight/chart',
+        element: <WeightChartPage />,
+      },
+      {
+        path: '/weight/table',
+        element: <WeightTablePage />,
+      },
+      {
+        path: '/weight/:id',
+        element: <WeightDetailPage />,
+      },
+      {
+        path: '/weight/:id/edit',
+        element: <WeightEditPage />,
       },
     ],
   },
