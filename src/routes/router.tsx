@@ -15,6 +15,12 @@ import { WeightChartPage } from '@/pages/weight/WeightChartPage';
 import { WeightTablePage } from '@/pages/weight/WeightTablePage';
 import { WeightDetailPage } from '@/pages/weight/WeightDetailPage';
 import { WeightEditPage } from '@/pages/weight/WeightEditPage';
+import { CatsList } from '@/pages/cats/CatsList';
+import { CatDetail } from '@/pages/cats/CatDetail';
+import { CatNew } from '@/pages/cats/CatNew';
+import { CatEdit } from '@/pages/cats/CatEdit';
+import { InvitePlayer } from '@/pages/cats/InvitePlayer';
+import { TransferChipPlayer } from '@/pages/cats/TransferChipPlayer';
 
 /**
  * Route shell for phase 0. Phase-1 feature agents (issues #6-#9) add their own routes
@@ -85,6 +91,34 @@ export const router = createBrowserRouter([
       {
         path: '/weight/:id/edit',
         element: <WeightEditPage />,
+      },
+      // issue #9 — cat management (list/detail/create/edit + player invite/leave/chip-
+      // custodian transfer). See docs/agents/init-frontend.md for the multi-agent build
+      // note: conflicts with sibling agents editing this same children array in their
+      // own worktrees are expected and reconciled by the phase-2 integration pass.
+      {
+        path: '/cats',
+        element: <CatsList />,
+      },
+      {
+        path: '/cats/new',
+        element: <CatNew />,
+      },
+      {
+        path: '/cats/:id',
+        element: <CatDetail />,
+      },
+      {
+        path: '/cats/:id/edit',
+        element: <CatEdit />,
+      },
+      {
+        path: '/cats/:id/invite',
+        element: <InvitePlayer />,
+      },
+      {
+        path: '/cats/:id/transfer-chip',
+        element: <TransferChipPlayer />,
       },
     ],
   },
