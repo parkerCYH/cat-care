@@ -10,4 +10,7 @@ export interface NavItem {
  * { label: '貓咪管理', path: '/cats' }. Keep it to top-level destinations only; nested
  * routes (edit/detail/new) are reached from within a feature, not from this menu.
  */
-export const navItems: NavItem[] = [{ label: '首頁', path: '/' }];
+export const navItems: NavItem[] = [
+  { label: '首頁', path: '/' },
+  { label: '貓咪管理', path: '/cats' },
+];
