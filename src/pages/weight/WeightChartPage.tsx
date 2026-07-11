@@ -13,7 +13,8 @@ import type { TooltipProps } from 'recharts';
 import { useGetApiV1CatCareCatsCatIdWeightRecords } from '@/api/generated/cat-care/cat-care';
 import { EmptyState } from '@/components/EmptyState';
 import { RetryButton } from '@/components/RetryState/RetryButton';
-import { formatDateTime, methodLabel, useCurrentCatId } from './weightShared';
+import { formatDateTime, methodLabel } from './weightShared';
+import { useCurrentCat } from '@/hooks/useCurrentCat';
 
 type Range = 'all' | '1m' | '3m';
 
@@ -30,7 +31,7 @@ const RANGE_OPTIONS: { value: Range; label: string }[] = [
  * and cached, so the toggle should feel instant).
  */
 export function WeightChartPage() {
-  const { catId, isLoading: isCatLoading, isError: isCatError } = useCurrentCatId();
+  const { catId, isLoading: isCatLoading, isError: isCatError } = useCurrentCat();
   const [range, setRange] = useState<Range>('all');
 
   const {

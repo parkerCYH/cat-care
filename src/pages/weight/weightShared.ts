@@ -1,49 +1,10 @@
-import { useMemo } from 'react';
-import { useAuthStore } from '@/stores/authStore';
-import { useGetApiV1CatCareCats } from '@/api/generated/cat-care/cat-care';
 import type { GetApiV1CatCareCatsCatIdWeightRecords200ItemMethod } from '@/api/generated/model/getApiV1CatCareCatsCatIdWeightRecords200ItemMethod';
 
-/**
- * There is no shared "current cat" seam yet — CatSwitcher (src/components/layout/CatSwitcher.tsx)
- * is still a phase-0 stub with a single placeholder entry and no onChange wiring. Until a later
- * pass introduces a real current-cat context, every feature page mirrors the switcher's own
- * assumption: fetch the caller's cats and use the first non-archived one. This is a judgment
- * call documented in the issue #8 implementation report, not a foundation change.
- */
-export function useCurrentCatId(): { catId: string | undefined; isLoading: boolean; isError: boolean } {
-  const { data, isLoading, isError } = useGetApiV1CatCareCats();
-  const catId = useMemo(() => data?.find((cat) => !cat.archivedAt)?.id, [data]);
-  return { catId, isLoading, isError };
-}
-
-/**
- * The generated API client has no `/me` or profile endpoint, and useAuthStore only exposes
- * the raw tokens (see src/stores/authStore.ts) — no decoded user id. `measuredBy` on a weight
- * record is the measuring Player's id (uuid, per the generated zod response schema), so to
- * decide whether to show edit/delete affordances (issue #8 resolution: hidden entirely for
- * non-owner records, mirroring issue #7) we decode the `sub` claim out of the JWT access token
- * ourselves rather than touching the shared auth store. This is a best-effort UI-only check —
- * the backend is the real enforcement (403 on non-owner edit/delete).
- */
-export function useCurrentUserId(): string | undefined {
-  const accessToken = useAuthStore((state) => state.accessToken);
-  return useMemo(() => decodeJwtSubject(accessToken), [accessToken]);
-}
-
-function decodeJwtSubject(token: string | null): string | undefined {
-  if (!token) return undefined;
-  const payload = token.split('.')[1];
-  if (!payload) return undefined;
-  try {
-    const base64 = payload.replace(/-/g, '+').replace(/_/g, '/');
-    const json = atob(base64);
-    const claims = JSON.parse(json) as Record<string, unknown>;
-    const candidate = claims.sub ?? claims.userId ?? claims.playerId ?? claims.id;
-    return typeof candidate === 'string' ? candidate : undefined;
-  } catch {
-    return undefined;
-  }
-}
+// "current user id" (owner check for issue #8's hidden edit/delete rule) now lives in the
+// shared `useCurrentUserId()` hook at src/lib/currentUser.ts (phase-2 integration pass,
+// issue #10) — this file used to have its own decode here that read a `sub`/`userId`/`id`
+// claim that never actually appears on this backend's access token (only `playerId` does,
+// see src/lib/currentUser.ts's comment), so it always resolved to null. Consolidated.
 
 /** 後端固定存公克(weightGrams),前端顯示層換算成公斤(issue #8 決議)。 */
 export function formatKg(weightGrams: number): string {

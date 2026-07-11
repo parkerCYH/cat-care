@@ -8,7 +8,9 @@ import {
 } from '@/api/generated/cat-care/cat-care';
 import { ConfirmDialog } from '@/components/ConfirmDialog';
 import { RetryButton } from '@/components/RetryState/RetryButton';
-import { formatDateTime, formatKg, methodLabel, useCurrentCatId, useCurrentUserId } from './weightShared';
+import { formatDateTime, formatKg, methodLabel } from './weightShared';
+import { useCurrentCat } from '@/hooks/useCurrentCat';
+import { useCurrentUserId } from '@/lib/currentUser';
 
 /**
  * /weight/:id — there is no GET-by-id endpoint on the backend for weight records (only
@@ -20,7 +22,7 @@ export function WeightDetailPage() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const queryClient = useQueryClient();
-  const { catId, isLoading: isCatLoading } = useCurrentCatId();
+  const { catId, isLoading: isCatLoading } = useCurrentCat();
   const currentUserId = useCurrentUserId();
   const [confirmOpen, setConfirmOpen] = useState(false);
 

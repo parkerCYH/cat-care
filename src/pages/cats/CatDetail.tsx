@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { Link, Navigate, useNavigate, useParams } from 'react-router-dom';
 import {
   useDeleteApiV1CatCareCatsCatId,
   useDeleteApiV1CatCareCatsCatIdPlayersMe,
@@ -11,7 +11,7 @@ import { useQueryClient } from '@tanstack/react-query';
 import { ConfirmDialog } from '@/components/ConfirmDialog';
 import { LeaveConfirmDialog } from './LeaveConfirmDialog';
 import { RetryButton } from '@/components/RetryState/RetryButton';
-import { useCurrentPlayerId } from './useCurrentPlayerId';
+import { useCurrentUserId } from '@/lib/currentUser';
 import type { AxiosError } from 'axios';
 
 /**
@@ -24,7 +24,7 @@ export function CatDetail() {
   const catId = id ?? '';
   const navigate = useNavigate();
   const queryClient = useQueryClient();
-  const currentPlayerId = useCurrentPlayerId();
+  const currentPlayerId = useCurrentUserId();
 
   const catQuery = useGetApiV1CatCareCatsCatId(catId);
   const playersQuery = useGetApiV1CatCareCatsCatIdPlayers(catId);
@@ -79,13 +79,11 @@ export function CatDetail() {
     return <p className="px-4 py-8 text-center text-sm text-gray-500">載入中…</p>;
   }
 
-  if (catQuery.isError || !cat) {
-    return (
-      <div className="flex flex-col items-center gap-2 px-4 py-8 text-center">
-        <p className="text-sm font-medium text-red-600">貓咪資料載入失敗</p>
-        <RetryButton onRetry={() => catQuery.refetch()} isPending={catQuery.isFetching} />
-      </div>
-    );
+  // Issue #10 resolution: "貓咪已被刪除(封存)或不存在:/cats/:id 一律導回 /cats,不區分
+  // 「真的不存在」與「已封存」" — a missing cat (404) and an archived cat (still fetches
+  // fine, just has archivedAt set) both redirect the same way, no distinct error state.
+  if (catQuery.isError || !cat || cat.archivedAt) {
+    return <Navigate to="/cats" replace />;
   }
 
   return (

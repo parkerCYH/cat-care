@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import {
-  useGetApiV1CatCareCats,
   useGetApiV1CatCareCatsCatIdBowelMovements,
   useGetApiV1CatCareCatsCatIdWeightRecords,
   usePostApiV1CatCareCatsCatIdBowelMovements,
@@ -10,6 +9,7 @@ import { EmptyState } from '@/components/EmptyState';
 import { RetryButton } from '@/components/RetryState/RetryButton';
 import { STOOL_TYPE_LABELS } from '@/lib/stoolType';
 import { WEIGHT_METHOD_LABELS } from '@/lib/weightMethod';
+import { useCurrentCat } from '@/hooks/useCurrentCat';
 
 /**
  * Home / quick-record page (issue #6 resolution).
@@ -18,16 +18,16 @@ import { WEIGHT_METHOD_LABELS } from '@/lib/weightMethod';
  * record buttons → recent-record summary (today/yesterday, latest bowel + latest weight
  * only — max 4 lines).
  *
- * "Current cat" seam: CatSwitcher (src/components/layout/CatSwitcher.tsx) is still a stub
- * per issue #9 and intentionally not wired up here. This page fetches the cat list itself
- * and uses the first non-archived cat, which also gives us the "no cats yet" signal needed
- * for the empty state below.
+ * "Current cat" seam (phase-2 integration, issue #10): resolved via the shared
+ * `useCurrentCat` hook (backed by `currentCatStore`) rather than fetching `/cats` and
+ * picking the first non-archived cat locally — this page also doubles as the "no cats
+ * yet" empty-state signal below.
  */
 export function Home() {
   const navigate = useNavigate();
-  const catsQuery = useGetApiV1CatCareCats();
+  const currentCat = useCurrentCat();
 
-  if (catsQuery.isLoading) {
+  if (currentCat.isLoading) {
     return (
       <div className="px-4 py-6">
         <p className="text-sm text-gray-400">載入中…</p>
@@ -35,19 +35,16 @@ export function Home() {
     );
   }
 
-  if (catsQuery.isError) {
+  if (currentCat.isError) {
     return (
       <div className="px-4 py-6">
         <p className="mb-2 text-sm text-gray-500">貓咪資料載入失敗</p>
-        <RetryButton onRetry={() => catsQuery.refetch()} label="點擊重試" />
+        <RetryButton onRetry={() => currentCat.refetch()} label="點擊重試" />
       </div>
     );
   }
 
-  const cats = catsQuery.data ?? [];
-  const currentCat = cats.find((cat) => !cat.archivedAt);
-
-  if (!currentCat) {
+  if (!currentCat.catId) {
     return (
       <EmptyState
         icon="🐱"
@@ -58,7 +55,7 @@ export function Home() {
     );
   }
 
-  return <HomeContent catId={currentCat.id} navigate={navigate} />;
+  return <HomeContent catId={currentCat.catId} navigate={navigate} />;
 }
 
 function HomeContent({

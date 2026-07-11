@@ -15,9 +15,9 @@ import {
   fromDatetimeLocalValue,
   gramsFromKgInput,
   toDatetimeLocalValue,
-  useCurrentCatId,
-  useCurrentUserId,
 } from './weightShared';
+import { useCurrentCat } from '@/hooks/useCurrentCat';
+import { useCurrentUserId } from '@/lib/currentUser';
 
 /**
  * Form-level schema mirrors the generated PATCH body (src/api/generated-zod/cat-care/cat-care.ts
@@ -41,7 +41,7 @@ export function WeightEditPage() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const queryClient = useQueryClient();
-  const { catId, isLoading: isCatLoading } = useCurrentCatId();
+  const { catId, isLoading: isCatLoading } = useCurrentCat();
   const currentUserId = useCurrentUserId();
 
   const { data: records, isLoading } = useGetApiV1CatCareCatsCatIdWeightRecords(catId ?? '', undefined, {

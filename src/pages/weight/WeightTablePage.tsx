@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom';
 import { useGetApiV1CatCareCatsCatIdWeightRecords } from '@/api/generated/cat-care/cat-care';
 import { EmptyState } from '@/components/EmptyState';
 import { RetryButton } from '@/components/RetryState/RetryButton';
-import { formatDateTime, formatKg, useCurrentCatId } from './weightShared';
+import { formatDateTime, formatKg } from './weightShared';
+import { useCurrentCat } from '@/hooks/useCurrentCat';
 
 /**
  * /weight/table — date/weight only, whole row navigates to /weight/:id for method + notes
@@ -12,7 +13,7 @@ import { formatDateTime, formatKg, useCurrentCatId } from './weightShared';
  * "Not yet specified") — this renders the full already-fetched list.
  */
 export function WeightTablePage() {
-  const { catId, isLoading: isCatLoading, isError: isCatError } = useCurrentCatId();
+  const { catId, isLoading: isCatLoading, isError: isCatError } = useCurrentCat();
   const {
     data: records,
     isLoading,
