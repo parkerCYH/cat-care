@@ -5,6 +5,10 @@ import { Home } from '@/pages/Home';
 import { Login } from '@/pages/Login';
 import { AuthCallback } from '@/pages/AuthCallback';
 import { NotFound } from '@/pages/NotFound';
+import { WeightChartPage } from '@/pages/weight/WeightChartPage';
+import { WeightTablePage } from '@/pages/weight/WeightTablePage';
+import { WeightDetailPage } from '@/pages/weight/WeightDetailPage';
+import { WeightEditPage } from '@/pages/weight/WeightEditPage';
 
 /**
  * Route shell for phase 0. Phase-1 feature agents (issues #6-#9) add their own routes
@@ -32,6 +36,23 @@ export const router = createBrowserRouter([
       {
         path: '/',
         element: <Home />,
+      },
+      // issue #8 — weight history (chart is the default entry point, table is secondary)
+      {
+        path: '/weight/chart',
+        element: <WeightChartPage />,
+      },
+      {
+        path: '/weight/table',
+        element: <WeightTablePage />,
+      },
+      {
+        path: '/weight/:id',
+        element: <WeightDetailPage />,
+      },
+      {
+        path: '/weight/:id/edit',
+        element: <WeightEditPage />,
       },
     ],
   },

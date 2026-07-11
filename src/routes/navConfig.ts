@@ -10,4 +10,10 @@ export interface NavItem {
  * { label: '貓咪管理', path: '/cats' }. Keep it to top-level destinations only; nested
  * routes (edit/detail/new) are reached from within a feature, not from this menu.
  */
-export const navItems: NavItem[] = [{ label: '首頁', path: '/' }];
+export const navItems: NavItem[] = [
+  { label: '首頁', path: '/' },
+  // issue #8: /weight/chart is the spec's default landing page for this feature
+  // ("拆成 /weight/chart(預設)與 /weight/table"); /weight/table is reached from within
+  // the chart page, not the hamburger menu, to keep the menu to one entry per feature.
+  { label: '體重歷史', path: '/weight/chart' },
+];
