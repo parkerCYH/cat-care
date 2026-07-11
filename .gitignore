@@ -1,0 +1,27 @@
+# Dependencies
+node_modules
+
+# Build output
+dist
+dist-ssr
+*.local
+*.tsbuildinfo
+
+# Vite PWA generated
+dev-dist
+
+# Editor
+.vscode/*
+!.vscode/extensions.json
+.idea
+
+# OS
+.DS_Store
+
+# Logs
+*.log
+npm-debug.log*
+
+# Env
+.env
+.env.local
