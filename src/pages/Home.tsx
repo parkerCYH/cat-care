@@ -1,9 +1,7 @@
-import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import {
   useGetApiV1CatCareCatsCatIdBowelMovements,
   useGetApiV1CatCareCatsCatIdWeightRecords,
-  usePostApiV1CatCareCatsCatIdBowelMovements,
 } from '@/api/generated/cat-care/cat-care';
 import { EmptyState } from '@/components/EmptyState';
 import { RetryButton } from '@/components/RetryState/RetryButton';
@@ -65,8 +63,6 @@ function HomeContent({
   catId: string;
   navigate: ReturnType<typeof useNavigate>;
 }) {
-  const [bowelState, setBowelState] = useState<'idle' | 'saved' | 'error'>('idle');
-
   // Recent-record summary: scope the fetch to the last two calendar days so we don't pull
   // full history just to show one line each (issue #6: "今天/昨天各只顯示每種類型最新一筆").
   const today = new Date();
@@ -78,62 +74,18 @@ function HomeContent({
   const bowelHistoryQuery = useGetApiV1CatCareCatsCatIdBowelMovements(catId, { from, to });
   const weightHistoryQuery = useGetApiV1CatCareCatsCatIdWeightRecords(catId, { from, to });
 
-  const bowelMutation = usePostApiV1CatCareCatsCatIdBowelMovements({
-    mutation: {
-      onSuccess: () => {
-        setBowelState('saved');
-        bowelHistoryQuery.refetch();
-      },
-      onError: () => setBowelState('error'),
-    },
-  });
-
-  function recordBowelQuick() {
-    setBowelState('saved');
-    bowelMutation.mutate({
-      catId,
-      data: {
-        recordedAt: new Date().toISOString(),
-        isAbnormal: false,
-      },
-    });
-  }
-
   const bowelRows = buildBowelRows(today, yesterday, bowelHistoryQuery.data);
   const weightRows = buildWeightRows(today, yesterday, weightHistoryQuery.data);
 
   return (
     <div className="flex flex-col gap-6 px-4 py-6">
       <div className="flex flex-col gap-3">
-        <div className="flex min-h-[72px] w-full items-center justify-between rounded-xl bg-gray-900 px-5 py-4 text-white">
-          <button
-            type="button"
-            onClick={recordBowelQuick}
-            className="flex-1 text-left text-lg font-semibold"
-          >
-            {bowelState === 'saved' ? '已記錄 ✓' : '記一筆排便'}
-          </button>
-          {bowelState === 'error' && (
-            <RetryButton
-              onRetry={() => {
-                setBowelState('saved');
-                bowelMutation.mutate({
-                  catId,
-                  data: { recordedAt: new Date().toISOString(), isAbnormal: false },
-                });
-              }}
-              label="記錄失敗,點擊重試"
-              isPending={bowelMutation.isPending}
-            />
-          )}
-          <Link
-            to="/bowel/new"
-            aria-label="調整排便紀錄細節"
-            className="ml-3 flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-xl text-white/80"
-          >
-            ›
-          </Link>
-        </div>
+        <Link
+          to="/bowel/new"
+          className="flex min-h-[72px] w-full items-center rounded-xl bg-gray-900 px-5 py-4 text-lg font-semibold text-white"
+        >
+          記一筆排便
+        </Link>
 
         <Link
           to="/weight/new"

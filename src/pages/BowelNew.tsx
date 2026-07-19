@@ -7,10 +7,9 @@ import { useConfirmBackNavigation } from '@/hooks/useConfirmBackNavigation';
 import { STOOL_TYPE_LABELS, STOOL_TYPE_OPTIONS } from '@/lib/stoolType';
 
 /**
- * `/bowel/new` — reached via the expand arrow next to Home's quick-record button, for
- * adjusting time / shape / abnormal flag / notes instead of the 2-tap default (issue #6).
- * Since the user is deliberately here to fill in fields (not blind-tapping), this submits
- * normally (wait for the mutation, show pending/error state) rather than optimistic-navigate.
+ * `/bowel/new` — reached via Home's single 記一筆排便 button (issue #6). Since the user is
+ * deliberately here to fill in fields, this submits normally (wait for the mutation, show
+ * pending/error state) rather than optimistic-navigate.
  */
 export function BowelNew() {
   const navigate = useNavigate();
