@@ -8,6 +8,7 @@ import { RetryButton } from '@/components/RetryState/RetryButton';
 import { STOOL_TYPE_LABELS } from '@/lib/stoolType';
 import { WEIGHT_METHOD_LABELS } from '@/lib/weightMethod';
 import { useCurrentCat } from '@/hooks/useCurrentCat';
+import { formatKg } from '@/pages/weight/weightShared';
 
 /**
  * Home / quick-record page (issue #6 resolution).
@@ -227,7 +228,7 @@ function buildWeightRows(
       key: `weight-${dayLabel}`,
       icon: '⚖️',
       time: `${dayLabel} ${formatTime(latest.measuredAt)}`,
-      label: `${(latest.weightGrams / 1000).toFixed(2)} kg${methodLabel ? ` · ${methodLabel}` : ''}`,
+      label: `${formatKg(latest.weightGrams)}${methodLabel ? ` · ${methodLabel}` : ''}`,
       abnormal: false,
     });
   }

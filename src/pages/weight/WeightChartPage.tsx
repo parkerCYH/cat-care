@@ -108,7 +108,7 @@ export function WeightChartPage() {
             />
             <YAxis
               domain={['dataMin - 0.2', 'dataMax + 0.2']}
-              tickFormatter={(value: number) => `${value}kg`}
+              tickFormatter={(value: number) => `${value.toFixed(2)}kg`}
               tick={{ fontSize: 12 }}
               width={48}
             />
@@ -155,7 +155,7 @@ function WeightTooltip({ active, payload }: TooltipProps<number, string>) {
   return (
     <div className="rounded-lg border border-gray-200 bg-white px-3 py-2 text-xs shadow-md">
       <p className="font-medium text-gray-900">{formatDateTime(point.measuredAt)}</p>
-      <p className="text-gray-700">{point.weightKg}kg</p>
+      <p className="text-gray-700">{point.weightKg.toFixed(2)}kg</p>
       <p className="text-gray-500">
         {methodLabel(point.method as Parameters<typeof methodLabel>[0])}
       </p>

@@ -6,9 +6,9 @@ import type { GetApiV1CatCareCatsCatIdWeightRecords200ItemMethod } from '@/api/g
 // claim that never actually appears on this backend's access token (only `playerId` does,
 // see src/lib/currentUser.ts's comment), so it always resolved to null. Consolidated.
 
-/** 後端固定存公克(weightGrams),前端顯示層換算成公斤(issue #8 決議)。 */
+/** 後端固定存公克(weightGrams),前端顯示層換算成公斤,固定 2 位小數含尾端 0(2026-07-19 grilling 決議)。 */
 export function formatKg(weightGrams: number): string {
-  return `${(weightGrams / 1000).toFixed(1)}kg`;
+  return `${(weightGrams / 1000).toFixed(2)}kg`;
 }
 
 export function gramsFromKgInput(weightKg: number): number {
