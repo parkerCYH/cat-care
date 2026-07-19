@@ -32,6 +32,10 @@ export function CatSwitcher() {
     return <span className="max-w-[45vw] truncate text-base font-semibold text-gray-900">貓咪管理</span>;
   }
 
+  if (cats.length === 1) {
+    return <span className="max-w-[45vw] truncate text-base font-semibold text-gray-900">{cats[0].name}</span>;
+  }
+
   function handleChange(id: string) {
     setCurrentCatId(id);
     // Only force-navigate when we're already viewing a specific cat's own route —
@@ -46,9 +50,8 @@ export function CatSwitcher() {
     <select
       aria-label="切換貓咪"
       value={current?.id}
-      disabled={cats.length <= 1}
       onChange={(event) => handleChange(event.target.value)}
-      className="max-w-[45vw] truncate bg-transparent text-base font-semibold text-gray-900 disabled:opacity-100"
+      className="max-w-[45vw] truncate bg-transparent text-base font-semibold text-gray-900"
     >
       {cats.map((cat) => (
         <option key={cat.id} value={cat.id}>
