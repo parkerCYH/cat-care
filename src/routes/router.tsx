@@ -4,6 +4,7 @@ import { ProtectedRoute } from './ProtectedRoute';
 import { Home } from '@/pages/Home';
 import { BowelNew } from '@/pages/BowelNew';
 import { WeightNew } from '@/pages/WeightNew';
+import { FluidInjectionNew } from '@/pages/FluidInjectionNew';
 import { Login } from '@/pages/Login';
 import { AuthCallback } from '@/pages/AuthCallback';
 import { NotFound } from '@/pages/NotFound';
@@ -15,6 +16,9 @@ import { WeightChartPage } from '@/pages/weight/WeightChartPage';
 import { WeightTablePage } from '@/pages/weight/WeightTablePage';
 import { WeightDetailPage } from '@/pages/weight/WeightDetailPage';
 import { WeightEditPage } from '@/pages/weight/WeightEditPage';
+import { FluidInjectionTable } from '@/pages/fluidInjection/FluidInjectionTable';
+import { FluidInjectionDetail } from '@/pages/fluidInjection/FluidInjectionDetail';
+import { FluidInjectionEdit } from '@/pages/fluidInjection/FluidInjectionEdit';
 import { CatsList } from '@/pages/cats/CatsList';
 import { CatDetail } from '@/pages/cats/CatDetail';
 import { CatNew } from '@/pages/cats/CatNew';
@@ -57,6 +61,10 @@ export const router = createBrowserRouter([
         path: '/weight/new',
         element: <WeightNew />,
       },
+      {
+        path: '/fluid-injection/new',
+        element: <FluidInjectionNew />,
+      },
       // Issue #7 (排便歷史規格): calendar is the default view, table is the filterable
       // list view; both are top-level siblings, detail/edit are reached from within.
       {
@@ -91,6 +99,19 @@ export const router = createBrowserRouter([
       {
         path: '/weight/:id/edit',
         element: <WeightEditPage />,
+      },
+      // 票 04 — 皮下點滴紀錄歷史(單純列表,無 abnormal 篩選需求,不另設日曆檢視)
+      {
+        path: '/fluid-injection/table',
+        element: <FluidInjectionTable />,
+      },
+      {
+        path: '/fluid-injection/:id',
+        element: <FluidInjectionDetail />,
+      },
+      {
+        path: '/fluid-injection/:id/edit',
+        element: <FluidInjectionEdit />,
       },
       // issue #9 — cat management (list/detail/create/edit + player invite/leave/chip-
       // custodian transfer). See docs/agents/init-frontend.md for the multi-agent build

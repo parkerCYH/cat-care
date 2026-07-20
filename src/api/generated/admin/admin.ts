@@ -41,6 +41,10 @@ import type {
   GetApiV1AdminCatCareCatsCatIdBowelMovements401,
   GetApiV1AdminCatCareCatsCatIdBowelMovements403,
   GetApiV1AdminCatCareCatsCatIdBowelMovements404,
+  GetApiV1AdminCatCareCatsCatIdFluidInjections200Item,
+  GetApiV1AdminCatCareCatsCatIdFluidInjections401,
+  GetApiV1AdminCatCareCatsCatIdFluidInjections403,
+  GetApiV1AdminCatCareCatsCatIdFluidInjections404,
   GetApiV1AdminCatCareCatsCatIdWeightRecords200Item,
   GetApiV1AdminCatCareCatsCatIdWeightRecords401,
   GetApiV1AdminCatCareCatsCatIdWeightRecords403,
@@ -1062,6 +1066,98 @@ export function useGetApiV1AdminCatCareCatsCatIdWeightRecords<TData = Awaited<Re
  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData> } {
 
   const queryOptions = getGetApiV1AdminCatCareCatsCatIdWeightRecordsQueryOptions(catId,options)
+
+  const query = useQuery(queryOptions, queryClient) as  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData> };
+
+  query.queryKey = queryOptions.queryKey ;
+
+  return query;
+}
+
+
+
+
+/**
+ * @summary Gateway: a cat's fluid injection history (requires admin.catCare.viewAll)
+ */
+export const getApiV1AdminCatCareCatsCatIdFluidInjections = (
+    catId: string,
+ signal?: AbortSignal
+) => {
+      
+      
+      return customInstance<GetApiV1AdminCatCareCatsCatIdFluidInjections200Item[]>(
+      {url: `/api/v1/admin/cat-care/cats/${catId}/fluid-injections`, method: 'GET', signal
+    },
+      );
+    }
+  
+
+
+
+export const getGetApiV1AdminCatCareCatsCatIdFluidInjectionsQueryKey = (catId?: string,) => {
+    return [
+    `/api/v1/admin/cat-care/cats/${catId}/fluid-injections`
+    ] as const;
+    }
+
+    
+export const getGetApiV1AdminCatCareCatsCatIdFluidInjectionsQueryOptions = <TData = Awaited<ReturnType<typeof getApiV1AdminCatCareCatsCatIdFluidInjections>>, TError = ErrorType<GetApiV1AdminCatCareCatsCatIdFluidInjections401 | GetApiV1AdminCatCareCatsCatIdFluidInjections403 | GetApiV1AdminCatCareCatsCatIdFluidInjections404>>(catId: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getApiV1AdminCatCareCatsCatIdFluidInjections>>, TError, TData>>, }
+) => {
+
+const {query: queryOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getGetApiV1AdminCatCareCatsCatIdFluidInjectionsQueryKey(catId);
+
+  
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof getApiV1AdminCatCareCatsCatIdFluidInjections>>> = ({ signal }) => getApiV1AdminCatCareCatsCatIdFluidInjections(catId, signal);
+
+      
+
+      
+
+   return  { queryKey, queryFn, enabled: !!(catId), ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof getApiV1AdminCatCareCatsCatIdFluidInjections>>, TError, TData> & { queryKey: DataTag<QueryKey, TData> }
+}
+
+export type GetApiV1AdminCatCareCatsCatIdFluidInjectionsQueryResult = NonNullable<Awaited<ReturnType<typeof getApiV1AdminCatCareCatsCatIdFluidInjections>>>
+export type GetApiV1AdminCatCareCatsCatIdFluidInjectionsQueryError = ErrorType<GetApiV1AdminCatCareCatsCatIdFluidInjections401 | GetApiV1AdminCatCareCatsCatIdFluidInjections403 | GetApiV1AdminCatCareCatsCatIdFluidInjections404>
+
+
+export function useGetApiV1AdminCatCareCatsCatIdFluidInjections<TData = Awaited<ReturnType<typeof getApiV1AdminCatCareCatsCatIdFluidInjections>>, TError = ErrorType<GetApiV1AdminCatCareCatsCatIdFluidInjections401 | GetApiV1AdminCatCareCatsCatIdFluidInjections403 | GetApiV1AdminCatCareCatsCatIdFluidInjections404>>(
+ catId: string, options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof getApiV1AdminCatCareCatsCatIdFluidInjections>>, TError, TData>> & Pick<
+        DefinedInitialDataOptions<
+          Awaited<ReturnType<typeof getApiV1AdminCatCareCatsCatIdFluidInjections>>,
+          TError,
+          Awaited<ReturnType<typeof getApiV1AdminCatCareCatsCatIdFluidInjections>>
+        > , 'initialData'
+      >, }
+ , queryClient?: QueryClient
+  ):  DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData> }
+export function useGetApiV1AdminCatCareCatsCatIdFluidInjections<TData = Awaited<ReturnType<typeof getApiV1AdminCatCareCatsCatIdFluidInjections>>, TError = ErrorType<GetApiV1AdminCatCareCatsCatIdFluidInjections401 | GetApiV1AdminCatCareCatsCatIdFluidInjections403 | GetApiV1AdminCatCareCatsCatIdFluidInjections404>>(
+ catId: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getApiV1AdminCatCareCatsCatIdFluidInjections>>, TError, TData>> & Pick<
+        UndefinedInitialDataOptions<
+          Awaited<ReturnType<typeof getApiV1AdminCatCareCatsCatIdFluidInjections>>,
+          TError,
+          Awaited<ReturnType<typeof getApiV1AdminCatCareCatsCatIdFluidInjections>>
+        > , 'initialData'
+      >, }
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData> }
+export function useGetApiV1AdminCatCareCatsCatIdFluidInjections<TData = Awaited<ReturnType<typeof getApiV1AdminCatCareCatsCatIdFluidInjections>>, TError = ErrorType<GetApiV1AdminCatCareCatsCatIdFluidInjections401 | GetApiV1AdminCatCareCatsCatIdFluidInjections403 | GetApiV1AdminCatCareCatsCatIdFluidInjections404>>(
+ catId: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getApiV1AdminCatCareCatsCatIdFluidInjections>>, TError, TData>>, }
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData> }
+/**
+ * @summary Gateway: a cat's fluid injection history (requires admin.catCare.viewAll)
+ */
+
+export function useGetApiV1AdminCatCareCatsCatIdFluidInjections<TData = Awaited<ReturnType<typeof getApiV1AdminCatCareCatsCatIdFluidInjections>>, TError = ErrorType<GetApiV1AdminCatCareCatsCatIdFluidInjections401 | GetApiV1AdminCatCareCatsCatIdFluidInjections403 | GetApiV1AdminCatCareCatsCatIdFluidInjections404>>(
+ catId: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getApiV1AdminCatCareCatsCatIdFluidInjections>>, TError, TData>>, }
+ , queryClient?: QueryClient 
+ ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData> } {
+
+  const queryOptions = getGetApiV1AdminCatCareCatsCatIdFluidInjectionsQueryOptions(catId,options)
 
   const query = useQuery(queryOptions, queryClient) as  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData> };
 

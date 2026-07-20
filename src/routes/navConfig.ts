@@ -19,5 +19,6 @@ export const navItems: NavItem[] = [
   // ("拆成 /weight/chart(預設)與 /weight/table"); /weight/table is reached from within
   // the chart page, not the hamburger menu, to keep the menu to one entry per feature.
   { label: '體重歷史', path: '/weight/chart' },
+  { label: '點滴歷史', path: '/fluid-injection/table' },
   { label: '貓咪管理', path: '/cats' },
 ];

@@ -184,6 +184,28 @@ export const getApiV1AdminCatCareCatsCatIdWeightRecordsResponseItem = zod.object
 export const getApiV1AdminCatCareCatsCatIdWeightRecordsResponse = zod.array(getApiV1AdminCatCareCatsCatIdWeightRecordsResponseItem)
 
 /**
+ * @summary Gateway: a cat's fluid injection history (requires admin.catCare.viewAll)
+ */
+export const getApiV1AdminCatCareCatsCatIdFluidInjectionsParams = zod.object({
+  "catId": zod.string().uuid()
+})
+
+export const getApiV1AdminCatCareCatsCatIdFluidInjectionsResponseItem = zod.object({
+  "id": zod.string().uuid(),
+  "catId": zod.string().uuid(),
+  "injectedBy": zod.string().uuid(),
+  "injectedAt": zod.string(),
+  "site": zod.string(),
+  "siteOther": zod.string().nullish(),
+  "volumeMl": zod.number(),
+  "fluidType": zod.string(),
+  "fluidTypeOther": zod.string().nullish(),
+  "notes": zod.string().nullish(),
+  "createdAt": zod.string()
+})
+export const getApiV1AdminCatCareCatsCatIdFluidInjectionsResponse = zod.array(getApiV1AdminCatCareCatsCatIdFluidInjectionsResponseItem)
+
+/**
  * @summary Gateway: Players related to cat-care (have catCare.access or belong to a cat), with profile (requires admin.catCare.viewAll)
  */
 export const getApiV1AdminCatCarePlayersResponseItem = zod.object({

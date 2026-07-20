@@ -220,6 +220,102 @@ export const deleteApiV1CatCareCatsCatIdWeightRecordsIdParams = zod.object({
 })
 
 /**
+ * @summary Record a subcutaneous fluid injection for a cat
+ */
+export const postApiV1CatCareCatsCatIdFluidInjectionsParams = zod.object({
+  "catId": zod.string().uuid()
+})
+
+
+export const postApiV1CatCareCatsCatIdFluidInjectionsBodyVolumeMlMin = 0;
+
+
+
+
+export const postApiV1CatCareCatsCatIdFluidInjectionsBody = zod.object({
+  "injectedAt": zod.string().datetime({}).optional(),
+  "site": zod.enum(['left', 'right', 'nape', 'other']),
+  "siteOther": zod.string().min(1).optional(),
+  "volumeMl": zod.number().min(postApiV1CatCareCatsCatIdFluidInjectionsBodyVolumeMlMin),
+  "fluidType": zod.enum(['normalSaline', 'lactatedRingers', 'other']),
+  "fluidTypeOther": zod.string().min(1).optional(),
+  "notes": zod.string().optional()
+})
+
+/**
+ * @summary List fluid injection history for a cat (optionally filtered by ?from=&to= date range)
+ */
+export const getApiV1CatCareCatsCatIdFluidInjectionsParams = zod.object({
+  "catId": zod.string().uuid()
+})
+
+export const getApiV1CatCareCatsCatIdFluidInjectionsQueryParams = zod.object({
+  "from": zod.string().date().optional(),
+  "to": zod.string().date().optional()
+})
+
+export const getApiV1CatCareCatsCatIdFluidInjectionsResponseItem = zod.object({
+  "id": zod.string().uuid(),
+  "catId": zod.string().uuid(),
+  "injectedBy": zod.string().uuid(),
+  "injectedAt": zod.string(),
+  "site": zod.enum(['left', 'right', 'nape', 'other']),
+  "siteOther": zod.string().nullish(),
+  "volumeMl": zod.number(),
+  "fluidType": zod.enum(['normalSaline', 'lactatedRingers', 'other']),
+  "fluidTypeOther": zod.string().nullish(),
+  "notes": zod.string().nullish(),
+  "createdAt": zod.string()
+})
+export const getApiV1CatCareCatsCatIdFluidInjectionsResponse = zod.array(getApiV1CatCareCatsCatIdFluidInjectionsResponseItem)
+
+/**
+ * @summary Edit a fluid injection record (only the injecting Player may edit)
+ */
+export const patchApiV1CatCareCatsCatIdFluidInjectionsIdParams = zod.object({
+  "catId": zod.string().uuid(),
+  "id": zod.string().uuid()
+})
+
+
+export const patchApiV1CatCareCatsCatIdFluidInjectionsIdBodyVolumeMlMin = 0;
+
+
+
+
+export const patchApiV1CatCareCatsCatIdFluidInjectionsIdBody = zod.object({
+  "injectedAt": zod.string().datetime({}).optional(),
+  "site": zod.enum(['left', 'right', 'nape', 'other']).optional(),
+  "siteOther": zod.string().min(1).optional(),
+  "volumeMl": zod.number().min(patchApiV1CatCareCatsCatIdFluidInjectionsIdBodyVolumeMlMin).optional(),
+  "fluidType": zod.enum(['normalSaline', 'lactatedRingers', 'other']).optional(),
+  "fluidTypeOther": zod.string().min(1).optional(),
+  "notes": zod.string().optional()
+})
+
+export const patchApiV1CatCareCatsCatIdFluidInjectionsIdResponse = zod.object({
+  "id": zod.string().uuid(),
+  "catId": zod.string().uuid(),
+  "injectedBy": zod.string().uuid(),
+  "injectedAt": zod.string(),
+  "site": zod.enum(['left', 'right', 'nape', 'other']),
+  "siteOther": zod.string().nullish(),
+  "volumeMl": zod.number(),
+  "fluidType": zod.enum(['normalSaline', 'lactatedRingers', 'other']),
+  "fluidTypeOther": zod.string().nullish(),
+  "notes": zod.string().nullish(),
+  "createdAt": zod.string()
+})
+
+/**
+ * @summary Hard-delete a fluid injection record (only the injecting Player may delete)
+ */
+export const deleteApiV1CatCareCatsCatIdFluidInjectionsIdParams = zod.object({
+  "catId": zod.string().uuid(),
+  "id": zod.string().uuid()
+})
+
+/**
  * @summary List the Players (co-caretakers) currently on a cat (caller must be a member)
  */
 export const getApiV1CatCareCatsCatIdPlayersParams = zod.object({

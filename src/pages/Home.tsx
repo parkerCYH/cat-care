@@ -1,12 +1,14 @@
 import { Link, useNavigate } from 'react-router-dom';
 import {
   useGetApiV1CatCareCatsCatIdBowelMovements,
+  useGetApiV1CatCareCatsCatIdFluidInjections,
   useGetApiV1CatCareCatsCatIdWeightRecords,
 } from '@/api/generated/cat-care/cat-care';
 import { EmptyState } from '@/components/EmptyState';
 import { RetryButton } from '@/components/RetryState/RetryButton';
 import { STOOL_TYPE_LABELS } from '@/lib/stoolType';
 import { WEIGHT_METHOD_LABELS } from '@/lib/weightMethod';
+import { formatSite, formatVolume } from '@/lib/fluidInjection';
 import { useCurrentCat } from '@/hooks/useCurrentCat';
 import { formatKg } from '@/pages/weight/weightShared';
 
@@ -74,9 +76,11 @@ function HomeContent({
 
   const bowelHistoryQuery = useGetApiV1CatCareCatsCatIdBowelMovements(catId, { from, to });
   const weightHistoryQuery = useGetApiV1CatCareCatsCatIdWeightRecords(catId, { from, to });
+  const fluidInjectionHistoryQuery = useGetApiV1CatCareCatsCatIdFluidInjections(catId, { from, to });
 
   const bowelRows = buildBowelRows(today, yesterday, bowelHistoryQuery.data);
   const weightRows = buildWeightRows(today, yesterday, weightHistoryQuery.data);
+  const fluidInjectionRows = buildFluidInjectionRows(today, yesterday, fluidInjectionHistoryQuery.data);
 
   return (
     <div className="flex flex-col gap-6 px-4 py-6">
@@ -94,6 +98,13 @@ function HomeContent({
         >
           記一筆體重
         </Link>
+
+        <Link
+          to="/fluid-injection/new"
+          className="flex min-h-[72px] w-full items-center rounded-xl border border-gray-900 px-5 py-4 text-lg font-semibold text-gray-900"
+        >
+          記一筆點滴
+        </Link>
       </div>
 
       <div className="flex flex-col gap-3">
@@ -108,6 +119,11 @@ function HomeContent({
           rows={weightRows}
           emptyText="尚無體重紀錄"
           onClick={() => navigate('/weight/table')}
+        />
+        <SummaryBlock
+          rows={fluidInjectionRows}
+          emptyText="尚無點滴紀錄"
+          onClick={() => navigate('/fluid-injection/table')}
         />
       </div>
     </div>
@@ -229,6 +245,37 @@ function buildWeightRows(
       icon: '⚖️',
       time: `${dayLabel} ${formatTime(latest.measuredAt)}`,
       label: `${formatKg(latest.weightGrams)}${methodLabel ? ` · ${methodLabel}` : ''}`,
+      abnormal: false,
+    });
+  }
+
+  return rows;
+}
+
+function buildFluidInjectionRows(
+  today: Date,
+  yesterday: Date,
+  records:
+    | { injectedAt: string; site: string; siteOther?: string | null; volumeMl: number }[]
+    | undefined,
+): SummaryRow[] {
+  const rows: SummaryRow[] = [];
+
+  for (const [dayLabel, day] of [
+    ['今天', today],
+    ['昨天', yesterday],
+  ] as const) {
+    const latest = (records ?? [])
+      .filter((r) => isSameDay(new Date(r.injectedAt), day))
+      .sort((a, b) => new Date(b.injectedAt).getTime() - new Date(a.injectedAt).getTime())[0];
+
+    if (!latest) continue;
+
+    rows.push({
+      key: `fluid-injection-${dayLabel}`,
+      icon: '💉',
+      time: `${dayLabel} ${formatTime(latest.injectedAt)}`,
+      label: `${formatSite(latest.site as Parameters<typeof formatSite>[0], latest.siteOther)} · ${formatVolume(latest.volumeMl)}`,
       abnormal: false,
     });
   }

@@ -31,6 +31,9 @@ import type {
   DeleteApiV1CatCareCatsCatIdBowelMovementsId401,
   DeleteApiV1CatCareCatsCatIdBowelMovementsId403,
   DeleteApiV1CatCareCatsCatIdBowelMovementsId404,
+  DeleteApiV1CatCareCatsCatIdFluidInjectionsId401,
+  DeleteApiV1CatCareCatsCatIdFluidInjectionsId403,
+  DeleteApiV1CatCareCatsCatIdFluidInjectionsId404,
   DeleteApiV1CatCareCatsCatIdPlayersMe401,
   DeleteApiV1CatCareCatsCatIdPlayersMe403,
   DeleteApiV1CatCareCatsCatIdPlayersMe404,
@@ -50,6 +53,11 @@ import type {
   GetApiV1CatCareCatsCatIdBowelMovements403,
   GetApiV1CatCareCatsCatIdBowelMovements404,
   GetApiV1CatCareCatsCatIdBowelMovementsParams,
+  GetApiV1CatCareCatsCatIdFluidInjections200Item,
+  GetApiV1CatCareCatsCatIdFluidInjections401,
+  GetApiV1CatCareCatsCatIdFluidInjections403,
+  GetApiV1CatCareCatsCatIdFluidInjections404,
+  GetApiV1CatCareCatsCatIdFluidInjectionsParams,
   GetApiV1CatCareCatsCatIdPlayers200Item,
   GetApiV1CatCareCatsCatIdPlayers401,
   GetApiV1CatCareCatsCatIdPlayers403,
@@ -64,6 +72,12 @@ import type {
   PatchApiV1CatCareCatsCatIdBowelMovementsId403,
   PatchApiV1CatCareCatsCatIdBowelMovementsId404,
   PatchApiV1CatCareCatsCatIdBowelMovementsIdBody,
+  PatchApiV1CatCareCatsCatIdFluidInjectionsId200,
+  PatchApiV1CatCareCatsCatIdFluidInjectionsId400,
+  PatchApiV1CatCareCatsCatIdFluidInjectionsId401,
+  PatchApiV1CatCareCatsCatIdFluidInjectionsId403,
+  PatchApiV1CatCareCatsCatIdFluidInjectionsId404,
+  PatchApiV1CatCareCatsCatIdFluidInjectionsIdBody,
   PatchApiV1CatCareCatsCatIdWeightRecordsId200,
   PatchApiV1CatCareCatsCatIdWeightRecordsId401,
   PatchApiV1CatCareCatsCatIdWeightRecordsId403,
@@ -78,6 +92,11 @@ import type {
   PostApiV1CatCareCatsCatIdBowelMovements403,
   PostApiV1CatCareCatsCatIdBowelMovements404,
   PostApiV1CatCareCatsCatIdBowelMovementsBody,
+  PostApiV1CatCareCatsCatIdFluidInjections201,
+  PostApiV1CatCareCatsCatIdFluidInjections401,
+  PostApiV1CatCareCatsCatIdFluidInjections403,
+  PostApiV1CatCareCatsCatIdFluidInjections404,
+  PostApiV1CatCareCatsCatIdFluidInjectionsBody,
   PostApiV1CatCareCatsCatIdPlayers201,
   PostApiV1CatCareCatsCatIdPlayers401,
   PostApiV1CatCareCatsCatIdPlayers403,
@@ -992,6 +1011,298 @@ export const useDeleteApiV1CatCareCatsCatIdWeightRecordsId = <TError = ErrorType
       > => {
 
       const mutationOptions = getDeleteApiV1CatCareCatsCatIdWeightRecordsIdMutationOptions(options);
+
+      return useMutation(mutationOptions, queryClient);
+    }
+    /**
+ * @summary Record a subcutaneous fluid injection for a cat
+ */
+export const postApiV1CatCareCatsCatIdFluidInjections = (
+    catId: string,
+    postApiV1CatCareCatsCatIdFluidInjectionsBody: PostApiV1CatCareCatsCatIdFluidInjectionsBody,
+ signal?: AbortSignal
+) => {
+      
+      
+      return customInstance<PostApiV1CatCareCatsCatIdFluidInjections201>(
+      {url: `/api/v1/cat-care/cats/${catId}/fluid-injections`, method: 'POST',
+      headers: {'Content-Type': 'application/json', },
+      data: postApiV1CatCareCatsCatIdFluidInjectionsBody, signal
+    },
+      );
+    }
+  
+
+
+export const getPostApiV1CatCareCatsCatIdFluidInjectionsMutationOptions = <TError = ErrorType<PostApiV1CatCareCatsCatIdFluidInjections401 | PostApiV1CatCareCatsCatIdFluidInjections403 | PostApiV1CatCareCatsCatIdFluidInjections404>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postApiV1CatCareCatsCatIdFluidInjections>>, TError,{catId: string;data: PostApiV1CatCareCatsCatIdFluidInjectionsBody}, TContext>, }
+): UseMutationOptions<Awaited<ReturnType<typeof postApiV1CatCareCatsCatIdFluidInjections>>, TError,{catId: string;data: PostApiV1CatCareCatsCatIdFluidInjectionsBody}, TContext> => {
+
+const mutationKey = ['postApiV1CatCareCatsCatIdFluidInjections'];
+const {mutation: mutationOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }};
+
+      
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof postApiV1CatCareCatsCatIdFluidInjections>>, {catId: string;data: PostApiV1CatCareCatsCatIdFluidInjectionsBody}> = (props) => {
+          const {catId,data} = props ?? {};
+
+          return  postApiV1CatCareCatsCatIdFluidInjections(catId,data,)
+        }
+
+        
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type PostApiV1CatCareCatsCatIdFluidInjectionsMutationResult = NonNullable<Awaited<ReturnType<typeof postApiV1CatCareCatsCatIdFluidInjections>>>
+    export type PostApiV1CatCareCatsCatIdFluidInjectionsMutationBody = PostApiV1CatCareCatsCatIdFluidInjectionsBody
+    export type PostApiV1CatCareCatsCatIdFluidInjectionsMutationError = ErrorType<PostApiV1CatCareCatsCatIdFluidInjections401 | PostApiV1CatCareCatsCatIdFluidInjections403 | PostApiV1CatCareCatsCatIdFluidInjections404>
+
+    /**
+ * @summary Record a subcutaneous fluid injection for a cat
+ */
+export const usePostApiV1CatCareCatsCatIdFluidInjections = <TError = ErrorType<PostApiV1CatCareCatsCatIdFluidInjections401 | PostApiV1CatCareCatsCatIdFluidInjections403 | PostApiV1CatCareCatsCatIdFluidInjections404>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postApiV1CatCareCatsCatIdFluidInjections>>, TError,{catId: string;data: PostApiV1CatCareCatsCatIdFluidInjectionsBody}, TContext>, }
+ , queryClient?: QueryClient): UseMutationResult<
+        Awaited<ReturnType<typeof postApiV1CatCareCatsCatIdFluidInjections>>,
+        TError,
+        {catId: string;data: PostApiV1CatCareCatsCatIdFluidInjectionsBody},
+        TContext
+      > => {
+
+      const mutationOptions = getPostApiV1CatCareCatsCatIdFluidInjectionsMutationOptions(options);
+
+      return useMutation(mutationOptions, queryClient);
+    }
+    /**
+ * @summary List fluid injection history for a cat (optionally filtered by ?from=&to= date range)
+ */
+export const getApiV1CatCareCatsCatIdFluidInjections = (
+    catId: string,
+    params?: GetApiV1CatCareCatsCatIdFluidInjectionsParams,
+ signal?: AbortSignal
+) => {
+      
+      
+      return customInstance<GetApiV1CatCareCatsCatIdFluidInjections200Item[]>(
+      {url: `/api/v1/cat-care/cats/${catId}/fluid-injections`, method: 'GET',
+        params, signal
+    },
+      );
+    }
+  
+
+
+
+export const getGetApiV1CatCareCatsCatIdFluidInjectionsQueryKey = (catId?: string,
+    params?: GetApiV1CatCareCatsCatIdFluidInjectionsParams,) => {
+    return [
+    `/api/v1/cat-care/cats/${catId}/fluid-injections`, ...(params ? [params]: [])
+    ] as const;
+    }
+
+    
+export const getGetApiV1CatCareCatsCatIdFluidInjectionsQueryOptions = <TData = Awaited<ReturnType<typeof getApiV1CatCareCatsCatIdFluidInjections>>, TError = ErrorType<GetApiV1CatCareCatsCatIdFluidInjections401 | GetApiV1CatCareCatsCatIdFluidInjections403 | GetApiV1CatCareCatsCatIdFluidInjections404>>(catId: string,
+    params?: GetApiV1CatCareCatsCatIdFluidInjectionsParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getApiV1CatCareCatsCatIdFluidInjections>>, TError, TData>>, }
+) => {
+
+const {query: queryOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getGetApiV1CatCareCatsCatIdFluidInjectionsQueryKey(catId,params);
+
+  
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof getApiV1CatCareCatsCatIdFluidInjections>>> = ({ signal }) => getApiV1CatCareCatsCatIdFluidInjections(catId,params, signal);
+
+      
+
+      
+
+   return  { queryKey, queryFn, enabled: !!(catId), ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof getApiV1CatCareCatsCatIdFluidInjections>>, TError, TData> & { queryKey: DataTag<QueryKey, TData> }
+}
+
+export type GetApiV1CatCareCatsCatIdFluidInjectionsQueryResult = NonNullable<Awaited<ReturnType<typeof getApiV1CatCareCatsCatIdFluidInjections>>>
+export type GetApiV1CatCareCatsCatIdFluidInjectionsQueryError = ErrorType<GetApiV1CatCareCatsCatIdFluidInjections401 | GetApiV1CatCareCatsCatIdFluidInjections403 | GetApiV1CatCareCatsCatIdFluidInjections404>
+
+
+export function useGetApiV1CatCareCatsCatIdFluidInjections<TData = Awaited<ReturnType<typeof getApiV1CatCareCatsCatIdFluidInjections>>, TError = ErrorType<GetApiV1CatCareCatsCatIdFluidInjections401 | GetApiV1CatCareCatsCatIdFluidInjections403 | GetApiV1CatCareCatsCatIdFluidInjections404>>(
+ catId: string,
+    params: undefined |  GetApiV1CatCareCatsCatIdFluidInjectionsParams, options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof getApiV1CatCareCatsCatIdFluidInjections>>, TError, TData>> & Pick<
+        DefinedInitialDataOptions<
+          Awaited<ReturnType<typeof getApiV1CatCareCatsCatIdFluidInjections>>,
+          TError,
+          Awaited<ReturnType<typeof getApiV1CatCareCatsCatIdFluidInjections>>
+        > , 'initialData'
+      >, }
+ , queryClient?: QueryClient
+  ):  DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData> }
+export function useGetApiV1CatCareCatsCatIdFluidInjections<TData = Awaited<ReturnType<typeof getApiV1CatCareCatsCatIdFluidInjections>>, TError = ErrorType<GetApiV1CatCareCatsCatIdFluidInjections401 | GetApiV1CatCareCatsCatIdFluidInjections403 | GetApiV1CatCareCatsCatIdFluidInjections404>>(
+ catId: string,
+    params?: GetApiV1CatCareCatsCatIdFluidInjectionsParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getApiV1CatCareCatsCatIdFluidInjections>>, TError, TData>> & Pick<
+        UndefinedInitialDataOptions<
+          Awaited<ReturnType<typeof getApiV1CatCareCatsCatIdFluidInjections>>,
+          TError,
+          Awaited<ReturnType<typeof getApiV1CatCareCatsCatIdFluidInjections>>
+        > , 'initialData'
+      >, }
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData> }
+export function useGetApiV1CatCareCatsCatIdFluidInjections<TData = Awaited<ReturnType<typeof getApiV1CatCareCatsCatIdFluidInjections>>, TError = ErrorType<GetApiV1CatCareCatsCatIdFluidInjections401 | GetApiV1CatCareCatsCatIdFluidInjections403 | GetApiV1CatCareCatsCatIdFluidInjections404>>(
+ catId: string,
+    params?: GetApiV1CatCareCatsCatIdFluidInjectionsParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getApiV1CatCareCatsCatIdFluidInjections>>, TError, TData>>, }
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData> }
+/**
+ * @summary List fluid injection history for a cat (optionally filtered by ?from=&to= date range)
+ */
+
+export function useGetApiV1CatCareCatsCatIdFluidInjections<TData = Awaited<ReturnType<typeof getApiV1CatCareCatsCatIdFluidInjections>>, TError = ErrorType<GetApiV1CatCareCatsCatIdFluidInjections401 | GetApiV1CatCareCatsCatIdFluidInjections403 | GetApiV1CatCareCatsCatIdFluidInjections404>>(
+ catId: string,
+    params?: GetApiV1CatCareCatsCatIdFluidInjectionsParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getApiV1CatCareCatsCatIdFluidInjections>>, TError, TData>>, }
+ , queryClient?: QueryClient 
+ ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData> } {
+
+  const queryOptions = getGetApiV1CatCareCatsCatIdFluidInjectionsQueryOptions(catId,params,options)
+
+  const query = useQuery(queryOptions, queryClient) as  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData> };
+
+  query.queryKey = queryOptions.queryKey ;
+
+  return query;
+}
+
+
+
+
+/**
+ * @summary Edit a fluid injection record (only the injecting Player may edit)
+ */
+export const patchApiV1CatCareCatsCatIdFluidInjectionsId = (
+    catId: string,
+    id: string,
+    patchApiV1CatCareCatsCatIdFluidInjectionsIdBody: PatchApiV1CatCareCatsCatIdFluidInjectionsIdBody,
+ ) => {
+      
+      
+      return customInstance<PatchApiV1CatCareCatsCatIdFluidInjectionsId200>(
+      {url: `/api/v1/cat-care/cats/${catId}/fluid-injections/${id}`, method: 'PATCH',
+      headers: {'Content-Type': 'application/json', },
+      data: patchApiV1CatCareCatsCatIdFluidInjectionsIdBody
+    },
+      );
+    }
+  
+
+
+export const getPatchApiV1CatCareCatsCatIdFluidInjectionsIdMutationOptions = <TError = ErrorType<PatchApiV1CatCareCatsCatIdFluidInjectionsId400 | PatchApiV1CatCareCatsCatIdFluidInjectionsId401 | PatchApiV1CatCareCatsCatIdFluidInjectionsId403 | PatchApiV1CatCareCatsCatIdFluidInjectionsId404>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof patchApiV1CatCareCatsCatIdFluidInjectionsId>>, TError,{catId: string;id: string;data: PatchApiV1CatCareCatsCatIdFluidInjectionsIdBody}, TContext>, }
+): UseMutationOptions<Awaited<ReturnType<typeof patchApiV1CatCareCatsCatIdFluidInjectionsId>>, TError,{catId: string;id: string;data: PatchApiV1CatCareCatsCatIdFluidInjectionsIdBody}, TContext> => {
+
+const mutationKey = ['patchApiV1CatCareCatsCatIdFluidInjectionsId'];
+const {mutation: mutationOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }};
+
+      
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof patchApiV1CatCareCatsCatIdFluidInjectionsId>>, {catId: string;id: string;data: PatchApiV1CatCareCatsCatIdFluidInjectionsIdBody}> = (props) => {
+          const {catId,id,data} = props ?? {};
+
+          return  patchApiV1CatCareCatsCatIdFluidInjectionsId(catId,id,data,)
+        }
+
+        
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type PatchApiV1CatCareCatsCatIdFluidInjectionsIdMutationResult = NonNullable<Awaited<ReturnType<typeof patchApiV1CatCareCatsCatIdFluidInjectionsId>>>
+    export type PatchApiV1CatCareCatsCatIdFluidInjectionsIdMutationBody = PatchApiV1CatCareCatsCatIdFluidInjectionsIdBody
+    export type PatchApiV1CatCareCatsCatIdFluidInjectionsIdMutationError = ErrorType<PatchApiV1CatCareCatsCatIdFluidInjectionsId400 | PatchApiV1CatCareCatsCatIdFluidInjectionsId401 | PatchApiV1CatCareCatsCatIdFluidInjectionsId403 | PatchApiV1CatCareCatsCatIdFluidInjectionsId404>
+
+    /**
+ * @summary Edit a fluid injection record (only the injecting Player may edit)
+ */
+export const usePatchApiV1CatCareCatsCatIdFluidInjectionsId = <TError = ErrorType<PatchApiV1CatCareCatsCatIdFluidInjectionsId400 | PatchApiV1CatCareCatsCatIdFluidInjectionsId401 | PatchApiV1CatCareCatsCatIdFluidInjectionsId403 | PatchApiV1CatCareCatsCatIdFluidInjectionsId404>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof patchApiV1CatCareCatsCatIdFluidInjectionsId>>, TError,{catId: string;id: string;data: PatchApiV1CatCareCatsCatIdFluidInjectionsIdBody}, TContext>, }
+ , queryClient?: QueryClient): UseMutationResult<
+        Awaited<ReturnType<typeof patchApiV1CatCareCatsCatIdFluidInjectionsId>>,
+        TError,
+        {catId: string;id: string;data: PatchApiV1CatCareCatsCatIdFluidInjectionsIdBody},
+        TContext
+      > => {
+
+      const mutationOptions = getPatchApiV1CatCareCatsCatIdFluidInjectionsIdMutationOptions(options);
+
+      return useMutation(mutationOptions, queryClient);
+    }
+    /**
+ * @summary Hard-delete a fluid injection record (only the injecting Player may delete)
+ */
+export const deleteApiV1CatCareCatsCatIdFluidInjectionsId = (
+    catId: string,
+    id: string,
+ ) => {
+      
+      
+      return customInstance<void>(
+      {url: `/api/v1/cat-care/cats/${catId}/fluid-injections/${id}`, method: 'DELETE'
+    },
+      );
+    }
+  
+
+
+export const getDeleteApiV1CatCareCatsCatIdFluidInjectionsIdMutationOptions = <TError = ErrorType<DeleteApiV1CatCareCatsCatIdFluidInjectionsId401 | DeleteApiV1CatCareCatsCatIdFluidInjectionsId403 | DeleteApiV1CatCareCatsCatIdFluidInjectionsId404>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deleteApiV1CatCareCatsCatIdFluidInjectionsId>>, TError,{catId: string;id: string}, TContext>, }
+): UseMutationOptions<Awaited<ReturnType<typeof deleteApiV1CatCareCatsCatIdFluidInjectionsId>>, TError,{catId: string;id: string}, TContext> => {
+
+const mutationKey = ['deleteApiV1CatCareCatsCatIdFluidInjectionsId'];
+const {mutation: mutationOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }};
+
+      
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof deleteApiV1CatCareCatsCatIdFluidInjectionsId>>, {catId: string;id: string}> = (props) => {
+          const {catId,id} = props ?? {};
+
+          return  deleteApiV1CatCareCatsCatIdFluidInjectionsId(catId,id,)
+        }
+
+        
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type DeleteApiV1CatCareCatsCatIdFluidInjectionsIdMutationResult = NonNullable<Awaited<ReturnType<typeof deleteApiV1CatCareCatsCatIdFluidInjectionsId>>>
+    
+    export type DeleteApiV1CatCareCatsCatIdFluidInjectionsIdMutationError = ErrorType<DeleteApiV1CatCareCatsCatIdFluidInjectionsId401 | DeleteApiV1CatCareCatsCatIdFluidInjectionsId403 | DeleteApiV1CatCareCatsCatIdFluidInjectionsId404>
+
+    /**
+ * @summary Hard-delete a fluid injection record (only the injecting Player may delete)
+ */
+export const useDeleteApiV1CatCareCatsCatIdFluidInjectionsId = <TError = ErrorType<DeleteApiV1CatCareCatsCatIdFluidInjectionsId401 | DeleteApiV1CatCareCatsCatIdFluidInjectionsId403 | DeleteApiV1CatCareCatsCatIdFluidInjectionsId404>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deleteApiV1CatCareCatsCatIdFluidInjectionsId>>, TError,{catId: string;id: string}, TContext>, }
+ , queryClient?: QueryClient): UseMutationResult<
+        Awaited<ReturnType<typeof deleteApiV1CatCareCatsCatIdFluidInjectionsId>>,
+        TError,
+        {catId: string;id: string},
+        TContext
+      > => {
+
+      const mutationOptions = getDeleteApiV1CatCareCatsCatIdFluidInjectionsIdMutationOptions(options);
 
       return useMutation(mutationOptions, queryClient);
     }
