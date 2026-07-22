@@ -51,6 +51,32 @@ export const getApiV1CatCareCatsCatIdResponse = zod.object({
 })
 
 /**
+ * @summary Update a cat's basic profile (name/birthdate/notes; caller must be a member)
+ */
+export const patchApiV1CatCareCatsCatIdParams = zod.object({
+  "catId": zod.string().uuid()
+})
+
+
+
+
+export const patchApiV1CatCareCatsCatIdBody = zod.object({
+  "name": zod.string().min(1).optional(),
+  "birthdate": zod.string().date().optional(),
+  "notes": zod.string().optional()
+})
+
+export const patchApiV1CatCareCatsCatIdResponse = zod.object({
+  "id": zod.string().uuid(),
+  "name": zod.string(),
+  "birthdate": zod.string().nullish(),
+  "notes": zod.string().nullish(),
+  "archivedAt": zod.string().nullish(),
+  "chipPlayerId": zod.string().uuid().nullish(),
+  "createdAt": zod.string()
+})
+
+/**
  * @summary Archive a cat (soft delete; caller must be a member)
  */
 export const deleteApiV1CatCareCatsCatIdParams = zod.object({

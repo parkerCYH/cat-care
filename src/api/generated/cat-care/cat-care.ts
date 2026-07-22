@@ -67,6 +67,11 @@ import type {
   GetApiV1CatCareCatsCatIdWeightRecords403,
   GetApiV1CatCareCatsCatIdWeightRecords404,
   GetApiV1CatCareCatsCatIdWeightRecordsParams,
+  PatchApiV1CatCareCatsCatId200,
+  PatchApiV1CatCareCatsCatId401,
+  PatchApiV1CatCareCatsCatId403,
+  PatchApiV1CatCareCatsCatId404,
+  PatchApiV1CatCareCatsCatIdBody,
   PatchApiV1CatCareCatsCatIdBowelMovementsId200,
   PatchApiV1CatCareCatsCatIdBowelMovementsId401,
   PatchApiV1CatCareCatsCatIdBowelMovementsId403,
@@ -370,6 +375,70 @@ export function useGetApiV1CatCareCatsCatId<TData = Awaited<ReturnType<typeof ge
 
 
 /**
+ * @summary Update a cat's basic profile (name/birthdate/notes; caller must be a member)
+ */
+export const patchApiV1CatCareCatsCatId = (
+    catId: string,
+    patchApiV1CatCareCatsCatIdBody: PatchApiV1CatCareCatsCatIdBody,
+ ) => {
+      
+      
+      return customInstance<PatchApiV1CatCareCatsCatId200>(
+      {url: `/api/v1/cat-care/cats/${catId}`, method: 'PATCH',
+      headers: {'Content-Type': 'application/json', },
+      data: patchApiV1CatCareCatsCatIdBody
+    },
+      );
+    }
+  
+
+
+export const getPatchApiV1CatCareCatsCatIdMutationOptions = <TError = ErrorType<PatchApiV1CatCareCatsCatId401 | PatchApiV1CatCareCatsCatId403 | PatchApiV1CatCareCatsCatId404>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof patchApiV1CatCareCatsCatId>>, TError,{catId: string;data: PatchApiV1CatCareCatsCatIdBody}, TContext>, }
+): UseMutationOptions<Awaited<ReturnType<typeof patchApiV1CatCareCatsCatId>>, TError,{catId: string;data: PatchApiV1CatCareCatsCatIdBody}, TContext> => {
+
+const mutationKey = ['patchApiV1CatCareCatsCatId'];
+const {mutation: mutationOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }};
+
+      
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof patchApiV1CatCareCatsCatId>>, {catId: string;data: PatchApiV1CatCareCatsCatIdBody}> = (props) => {
+          const {catId,data} = props ?? {};
+
+          return  patchApiV1CatCareCatsCatId(catId,data,)
+        }
+
+        
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type PatchApiV1CatCareCatsCatIdMutationResult = NonNullable<Awaited<ReturnType<typeof patchApiV1CatCareCatsCatId>>>
+    export type PatchApiV1CatCareCatsCatIdMutationBody = PatchApiV1CatCareCatsCatIdBody
+    export type PatchApiV1CatCareCatsCatIdMutationError = ErrorType<PatchApiV1CatCareCatsCatId401 | PatchApiV1CatCareCatsCatId403 | PatchApiV1CatCareCatsCatId404>
+
+    /**
+ * @summary Update a cat's basic profile (name/birthdate/notes; caller must be a member)
+ */
+export const usePatchApiV1CatCareCatsCatId = <TError = ErrorType<PatchApiV1CatCareCatsCatId401 | PatchApiV1CatCareCatsCatId403 | PatchApiV1CatCareCatsCatId404>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof patchApiV1CatCareCatsCatId>>, TError,{catId: string;data: PatchApiV1CatCareCatsCatIdBody}, TContext>, }
+ , queryClient?: QueryClient): UseMutationResult<
+        Awaited<ReturnType<typeof patchApiV1CatCareCatsCatId>>,
+        TError,
+        {catId: string;data: PatchApiV1CatCareCatsCatIdBody},
+        TContext
+      > => {
+
+      const mutationOptions = getPatchApiV1CatCareCatsCatIdMutationOptions(options);
+
+      return useMutation(mutationOptions, queryClient);
+    }
+    /**
  * @summary Archive a cat (soft delete; caller must be a member)
  */
 export const deleteApiV1CatCareCatsCatId = (
