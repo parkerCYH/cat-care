@@ -8,7 +8,7 @@ export default defineConfig({
   plugins: [
     react(),
     VitePWA({
-      registerType: 'autoUpdate',
+      registerType: 'prompt',
       // Phase 0 scope (see GitHub issue #5 resolution): app-shell precaching only.
       // No offline write queue, no background sync — failed mutations are retried
       // manually by the user re-triggering the TanStack Query mutation.

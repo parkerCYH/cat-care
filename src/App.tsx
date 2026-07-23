@@ -3,12 +3,14 @@ import { QueryClientProvider } from '@tanstack/react-query';
 import { queryClient } from '@/api/queryClient';
 import { router } from '@/routes/router';
 import { AppLoadingScreen } from '@/components/AppLoadingScreen';
+import { PwaUpdatePrompt } from '@/components/PwaUpdatePrompt';
 import { useAppReady } from '@/hooks/useAppReady';
 
 export function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <AppLoadingGate />
+      <PwaUpdatePrompt />
     </QueryClientProvider>
   );
 }
