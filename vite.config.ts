@@ -14,6 +14,16 @@ export default defineConfig({
       // manually by the user re-triggering the TanStack Query mutation.
       workbox: {
         globPatterns: ['**/*.{js,css,html,svg,png,ico,woff2}'],
+        runtimeCaching: [
+          {
+            // Cache-first with background revalidate so the cats list appears instantly
+            // on repeat opens; the fresh response is stashed for next time, not pushed
+            // back into the current render (see cat-care-sw-cache-first ticket 02).
+            urlPattern: ({ url, request }) =>
+              request.method === 'GET' && url.pathname === '/api/v1/cat-care/cats',
+            handler: 'StaleWhileRevalidate',
+          },
+        ],
       },
       manifest: {
         name: 'Cat Care',
