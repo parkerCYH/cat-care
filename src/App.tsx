@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { RouterProvider } from 'react-router-dom';
 import { QueryClientProvider } from '@tanstack/react-query';
 import { queryClient } from '@/api/queryClient';
@@ -5,8 +6,15 @@ import { router } from '@/routes/router';
 import { AppLoadingScreen } from '@/components/AppLoadingScreen';
 import { PwaUpdatePrompt } from '@/components/PwaUpdatePrompt';
 import { useAppReady } from '@/hooks/useAppReady';
+import { API_BASE_URL } from '@/stores/authStore';
 
 export function App() {
+  useEffect(() => {
+    // Fire-and-forget wake ping for parker-api's Render free-tier cold start
+    // (cat-care-sw-cache-first ticket 03) — no auth, no error handling, no UI impact.
+    fetch(`${API_BASE_URL}/health`).catch(() => {});
+  }, []);
+
   return (
     <QueryClientProvider client={queryClient}>
       <AppLoadingGate />
