@@ -2,11 +2,25 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import { VitePWA } from 'vite-plugin-pwa';
 import path from 'node:path';
+import fs from 'node:fs';
 
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [
     react(),
+    // Writes dist/version.json at build time so the deploy-verification script can fetch
+    // the deployed commit hash (see parker-api-migration-automation ticket 09/10). Only
+    // VERCEL_GIT_COMMIT_SHA is populated on Vercel; local builds get `commit: null`.
+    {
+      name: 'write-version-json',
+      apply: 'build',
+      closeBundle() {
+        fs.writeFileSync(
+          path.resolve(__dirname, 'dist/version.json'),
+          JSON.stringify({ commit: process.env.VERCEL_GIT_COMMIT_SHA ?? null }),
+        );
+      },
+    },
     VitePWA({
       registerType: 'prompt',
       // Phase 0 scope (see GitHub issue #5 resolution): app-shell precaching only.
