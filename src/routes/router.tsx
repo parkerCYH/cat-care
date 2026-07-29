@@ -25,6 +25,7 @@ import { CatNew } from '@/pages/cats/CatNew';
 import { CatEdit } from '@/pages/cats/CatEdit';
 import { InvitePlayer } from '@/pages/cats/InvitePlayer';
 import { TransferChipPlayer } from '@/pages/cats/TransferChipPlayer';
+import { BloodworkFlowPrototype } from '@/pages/prototypes/BloodworkFlowPrototype';
 
 /**
  * Route shell for phase 0. Phase-1 feature agents (issues #6-#9) add their own routes
@@ -141,6 +142,11 @@ export const router = createBrowserRouter([
         path: '/cats/:id/transfer-chip',
         element: <TransferChipPlayer />,
       },
+      // PROTOTYPE — 票 12（cat-care-bloodwork-ai-record UI 流程稿），dev-only、不進production
+      // build。/prototype 骨架切在 SKILL.md 定義的 sub-shape B：全新功能沒有既有頁面可以掛。
+      ...(import.meta.env.DEV
+        ? [{ path: '/prototype/bloodwork', element: <BloodworkFlowPrototype /> }]
+        : []),
     ],
   },
   {
