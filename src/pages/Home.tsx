@@ -106,7 +106,13 @@ function HomeContent({
           記一筆點滴
         </Link>
 
-        {/* 票 19 — 手動填寫驗血報告(拍照辨識入口留給票 21) */}
+        {/* 票 21 — 拍照辨識為主要入口(比照原型 VariantA 的填色主按鈕),手動填寫(票 19)為次要入口 */}
+        <Link
+          to="/bloodwork/photo"
+          className="flex min-h-[72px] w-full items-center rounded-xl bg-gray-900 px-5 py-4 text-lg font-semibold text-white"
+        >
+          📷 拍照辨識驗血報告
+        </Link>
         <Link
           to="/bloodwork/new"
           className="flex min-h-[72px] w-full items-center rounded-xl border border-gray-900 px-5 py-4 text-lg font-semibold text-gray-900"

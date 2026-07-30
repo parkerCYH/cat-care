@@ -110,6 +110,12 @@ import type {
   PostApiV1CatCareCatsCatIdBloodworkRecords403,
   PostApiV1CatCareCatsCatIdBloodworkRecords404,
   PostApiV1CatCareCatsCatIdBloodworkRecordsBody,
+  PostApiV1CatCareCatsCatIdBloodworkRecordsRecognize202,
+  PostApiV1CatCareCatsCatIdBloodworkRecordsRecognize401,
+  PostApiV1CatCareCatsCatIdBloodworkRecordsRecognize403,
+  PostApiV1CatCareCatsCatIdBloodworkRecordsRecognize404,
+  PostApiV1CatCareCatsCatIdBloodworkRecordsRecognize502,
+  PostApiV1CatCareCatsCatIdBloodworkRecordsRecognizeBody,
   PostApiV1CatCareCatsCatIdBowelMovements201,
   PostApiV1CatCareCatsCatIdBowelMovements401,
   PostApiV1CatCareCatsCatIdBowelMovements403,
@@ -130,6 +136,10 @@ import type {
   PostApiV1CatCareCatsCatIdWeightRecords403,
   PostApiV1CatCareCatsCatIdWeightRecords404,
   PostApiV1CatCareCatsCatIdWeightRecordsBody,
+  PostApiV1CatCareEveCallbackBloodworkRecognitionJobId200,
+  PostApiV1CatCareEveCallbackBloodworkRecognitionJobId401,
+  PostApiV1CatCareEveCallbackBloodworkRecognitionJobId404,
+  PostApiV1CatCareEveCallbackBloodworkRecognitionJobIdBody,
   PutApiV1CatCareCatsCatIdChipPlayer200,
   PutApiV1CatCareCatsCatIdChipPlayer401,
   PutApiV1CatCareCatsCatIdChipPlayer403,
@@ -1682,6 +1692,138 @@ export const useDeleteApiV1CatCareCatsCatIdBloodworkRecordsId = <TError = ErrorT
       > => {
 
       const mutationOptions = getDeleteApiV1CatCareCatsCatIdBloodworkRecordsIdMutationOptions(options);
+
+      return useMutation(mutationOptions, queryClient);
+    }
+    /**
+ * @summary Upload a bloodwork report photo for AI recognition (async; result lands as a draft record once eve calls back)
+ */
+export const postApiV1CatCareCatsCatIdBloodworkRecordsRecognize = (
+    catId: string,
+    postApiV1CatCareCatsCatIdBloodworkRecordsRecognizeBody: PostApiV1CatCareCatsCatIdBloodworkRecordsRecognizeBody,
+ signal?: AbortSignal
+) => {
+      
+      const formData = new FormData();
+formData.append(`photo`, postApiV1CatCareCatsCatIdBloodworkRecordsRecognizeBody.photo)
+
+      return customInstance<PostApiV1CatCareCatsCatIdBloodworkRecordsRecognize202>(
+      {url: `/api/v1/cat-care/cats/${catId}/bloodwork-records/recognize`, method: 'POST',
+      headers: {'Content-Type': 'multipart/form-data', },
+       data: formData, signal
+    },
+      );
+    }
+  
+
+
+export const getPostApiV1CatCareCatsCatIdBloodworkRecordsRecognizeMutationOptions = <TError = ErrorType<PostApiV1CatCareCatsCatIdBloodworkRecordsRecognize401 | PostApiV1CatCareCatsCatIdBloodworkRecordsRecognize403 | PostApiV1CatCareCatsCatIdBloodworkRecordsRecognize404 | PostApiV1CatCareCatsCatIdBloodworkRecordsRecognize502>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postApiV1CatCareCatsCatIdBloodworkRecordsRecognize>>, TError,{catId: string;data: PostApiV1CatCareCatsCatIdBloodworkRecordsRecognizeBody}, TContext>, }
+): UseMutationOptions<Awaited<ReturnType<typeof postApiV1CatCareCatsCatIdBloodworkRecordsRecognize>>, TError,{catId: string;data: PostApiV1CatCareCatsCatIdBloodworkRecordsRecognizeBody}, TContext> => {
+
+const mutationKey = ['postApiV1CatCareCatsCatIdBloodworkRecordsRecognize'];
+const {mutation: mutationOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }};
+
+      
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof postApiV1CatCareCatsCatIdBloodworkRecordsRecognize>>, {catId: string;data: PostApiV1CatCareCatsCatIdBloodworkRecordsRecognizeBody}> = (props) => {
+          const {catId,data} = props ?? {};
+
+          return  postApiV1CatCareCatsCatIdBloodworkRecordsRecognize(catId,data,)
+        }
+
+        
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type PostApiV1CatCareCatsCatIdBloodworkRecordsRecognizeMutationResult = NonNullable<Awaited<ReturnType<typeof postApiV1CatCareCatsCatIdBloodworkRecordsRecognize>>>
+    export type PostApiV1CatCareCatsCatIdBloodworkRecordsRecognizeMutationBody = PostApiV1CatCareCatsCatIdBloodworkRecordsRecognizeBody
+    export type PostApiV1CatCareCatsCatIdBloodworkRecordsRecognizeMutationError = ErrorType<PostApiV1CatCareCatsCatIdBloodworkRecordsRecognize401 | PostApiV1CatCareCatsCatIdBloodworkRecordsRecognize403 | PostApiV1CatCareCatsCatIdBloodworkRecordsRecognize404 | PostApiV1CatCareCatsCatIdBloodworkRecordsRecognize502>
+
+    /**
+ * @summary Upload a bloodwork report photo for AI recognition (async; result lands as a draft record once eve calls back)
+ */
+export const usePostApiV1CatCareCatsCatIdBloodworkRecordsRecognize = <TError = ErrorType<PostApiV1CatCareCatsCatIdBloodworkRecordsRecognize401 | PostApiV1CatCareCatsCatIdBloodworkRecordsRecognize403 | PostApiV1CatCareCatsCatIdBloodworkRecordsRecognize404 | PostApiV1CatCareCatsCatIdBloodworkRecordsRecognize502>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postApiV1CatCareCatsCatIdBloodworkRecordsRecognize>>, TError,{catId: string;data: PostApiV1CatCareCatsCatIdBloodworkRecordsRecognizeBody}, TContext>, }
+ , queryClient?: QueryClient): UseMutationResult<
+        Awaited<ReturnType<typeof postApiV1CatCareCatsCatIdBloodworkRecordsRecognize>>,
+        TError,
+        {catId: string;data: PostApiV1CatCareCatsCatIdBloodworkRecordsRecognizeBody},
+        TContext
+      > => {
+
+      const mutationOptions = getPostApiV1CatCareCatsCatIdBloodworkRecordsRecognizeMutationOptions(options);
+
+      return useMutation(mutationOptions, queryClient);
+    }
+    /**
+ * @summary eve → parker-api callback for a photo-recognition job (service-to-service; verified by shared key, not Player auth)
+ */
+export const postApiV1CatCareEveCallbackBloodworkRecognitionJobId = (
+    jobId: string,
+    postApiV1CatCareEveCallbackBloodworkRecognitionJobIdBody: PostApiV1CatCareEveCallbackBloodworkRecognitionJobIdBody,
+ signal?: AbortSignal
+) => {
+      
+      
+      return customInstance<PostApiV1CatCareEveCallbackBloodworkRecognitionJobId200>(
+      {url: `/api/v1/cat-care/eve-callback/bloodwork-recognition/${jobId}`, method: 'POST',
+      headers: {'Content-Type': 'application/json', },
+      data: postApiV1CatCareEveCallbackBloodworkRecognitionJobIdBody, signal
+    },
+      );
+    }
+  
+
+
+export const getPostApiV1CatCareEveCallbackBloodworkRecognitionJobIdMutationOptions = <TError = ErrorType<PostApiV1CatCareEveCallbackBloodworkRecognitionJobId401 | PostApiV1CatCareEveCallbackBloodworkRecognitionJobId404>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postApiV1CatCareEveCallbackBloodworkRecognitionJobId>>, TError,{jobId: string;data: PostApiV1CatCareEveCallbackBloodworkRecognitionJobIdBody}, TContext>, }
+): UseMutationOptions<Awaited<ReturnType<typeof postApiV1CatCareEveCallbackBloodworkRecognitionJobId>>, TError,{jobId: string;data: PostApiV1CatCareEveCallbackBloodworkRecognitionJobIdBody}, TContext> => {
+
+const mutationKey = ['postApiV1CatCareEveCallbackBloodworkRecognitionJobId'];
+const {mutation: mutationOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }};
+
+      
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof postApiV1CatCareEveCallbackBloodworkRecognitionJobId>>, {jobId: string;data: PostApiV1CatCareEveCallbackBloodworkRecognitionJobIdBody}> = (props) => {
+          const {jobId,data} = props ?? {};
+
+          return  postApiV1CatCareEveCallbackBloodworkRecognitionJobId(jobId,data,)
+        }
+
+        
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type PostApiV1CatCareEveCallbackBloodworkRecognitionJobIdMutationResult = NonNullable<Awaited<ReturnType<typeof postApiV1CatCareEveCallbackBloodworkRecognitionJobId>>>
+    export type PostApiV1CatCareEveCallbackBloodworkRecognitionJobIdMutationBody = PostApiV1CatCareEveCallbackBloodworkRecognitionJobIdBody
+    export type PostApiV1CatCareEveCallbackBloodworkRecognitionJobIdMutationError = ErrorType<PostApiV1CatCareEveCallbackBloodworkRecognitionJobId401 | PostApiV1CatCareEveCallbackBloodworkRecognitionJobId404>
+
+    /**
+ * @summary eve → parker-api callback for a photo-recognition job (service-to-service; verified by shared key, not Player auth)
+ */
+export const usePostApiV1CatCareEveCallbackBloodworkRecognitionJobId = <TError = ErrorType<PostApiV1CatCareEveCallbackBloodworkRecognitionJobId401 | PostApiV1CatCareEveCallbackBloodworkRecognitionJobId404>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postApiV1CatCareEveCallbackBloodworkRecognitionJobId>>, TError,{jobId: string;data: PostApiV1CatCareEveCallbackBloodworkRecognitionJobIdBody}, TContext>, }
+ , queryClient?: QueryClient): UseMutationResult<
+        Awaited<ReturnType<typeof postApiV1CatCareEveCallbackBloodworkRecognitionJobId>>,
+        TError,
+        {jobId: string;data: PostApiV1CatCareEveCallbackBloodworkRecognitionJobIdBody},
+        TContext
+      > => {
+
+      const mutationOptions = getPostApiV1CatCareEveCallbackBloodworkRecognitionJobIdMutationOptions(options);
 
       return useMutation(mutationOptions, queryClient);
     }

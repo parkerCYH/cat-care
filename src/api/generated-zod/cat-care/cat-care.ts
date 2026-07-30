@@ -485,7 +485,8 @@ export const patchApiV1CatCareCatsCatIdBloodworkRecordsIdBody = zod.object({
   "rdwPercent": zod.number().nullish(),
   "rdwa": zod.number().nullish(),
   "plt": zod.number().nullish(),
-  "mpv": zod.number().nullish()
+  "mpv": zod.number().nullish(),
+  "status": zod.enum(['confirmed']).optional()
 })
 
 export const patchApiV1CatCareCatsCatIdBloodworkRecordsIdResponse = zod.object({
@@ -537,6 +538,70 @@ export const patchApiV1CatCareCatsCatIdBloodworkRecordsIdResponse = zod.object({
 export const deleteApiV1CatCareCatsCatIdBloodworkRecordsIdParams = zod.object({
   "catId": zod.string().uuid(),
   "id": zod.string().uuid()
+})
+
+/**
+ * @summary Upload a bloodwork report photo for AI recognition (async; result lands as a draft record once eve calls back)
+ */
+export const postApiV1CatCareCatsCatIdBloodworkRecordsRecognizeParams = zod.object({
+  "catId": zod.string().uuid()
+})
+
+export const postApiV1CatCareCatsCatIdBloodworkRecordsRecognizeBody = zod.object({
+  "photo": zod.instanceof(File)
+})
+
+/**
+ * @summary eve → parker-api callback for a photo-recognition job (service-to-service; verified by shared key, not Player auth)
+ */
+export const postApiV1CatCareEveCallbackBloodworkRecognitionJobIdParams = zod.object({
+  "jobId": zod.string()
+})
+
+export const postApiV1CatCareEveCallbackBloodworkRecognitionJobIdBody = zod.union([zod.object({
+  "status": zod.enum(['success']),
+  "data": zod.object({
+  "glu": zod.number().nullish(),
+  "crea": zod.number().nullish(),
+  "bun": zod.number().nullish(),
+  "bunCrea": zod.number().nullish(),
+  "tp": zod.number().nullish(),
+  "alb": zod.number().nullish(),
+  "glob": zod.number().nullish(),
+  "albGlob": zod.number().nullish(),
+  "alt": zod.number().nullish(),
+  "alkp": zod.number().nullish(),
+  "fpl": zod.number().nullish(),
+  "na": zod.number().nullish(),
+  "k": zod.number().nullish(),
+  "naK": zod.number().nullish(),
+  "cl": zod.number().nullish(),
+  "osmCalc": zod.number().nullish(),
+  "tt4": zod.number().nullish(),
+  "wbc": zod.number().nullish(),
+  "lym": zod.number().nullish(),
+  "mono": zod.number().nullish(),
+  "gran": zod.number().nullish(),
+  "lymPercent": zod.number().nullish(),
+  "monPercent": zod.number().nullish(),
+  "graPercent": zod.number().nullish(),
+  "hgb": zod.number().nullish(),
+  "hct": zod.number().nullish(),
+  "rbc": zod.number().nullish(),
+  "mcv": zod.number().nullish(),
+  "mch": zod.number().nullish(),
+  "mchc": zod.number().nullish(),
+  "rdwPercent": zod.number().nullish(),
+  "rdwa": zod.number().nullish(),
+  "plt": zod.number().nullish(),
+  "mpv": zod.number().nullish()
+})
+}),zod.object({
+  "status": zod.enum(['failed'])
+})])
+
+export const postApiV1CatCareEveCallbackBloodworkRecognitionJobIdResponse = zod.object({
+  "ok": zod.boolean()
 })
 
 /**

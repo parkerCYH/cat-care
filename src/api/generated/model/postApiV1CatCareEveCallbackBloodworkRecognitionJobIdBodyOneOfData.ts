@@ -4,10 +4,8 @@
  * parker-api
  * OpenAPI spec version: 0.1.0
  */
-import type { PatchApiV1CatCareCatsCatIdBloodworkRecordsIdBodyStatus } from './patchApiV1CatCareCatsCatIdBloodworkRecordsIdBodyStatus';
 
-export type PatchApiV1CatCareCatsCatIdBloodworkRecordsIdBody = {
-  recordedAt?: string;
+export type PostApiV1CatCareEveCallbackBloodworkRecognitionJobIdBodyOneOfData = {
   /** @nullable */
   glu?: number | null;
   /** @nullable */
@@ -76,5 +74,4 @@ export type PatchApiV1CatCareCatsCatIdBloodworkRecordsIdBody = {
   plt?: number | null;
   /** @nullable */
   mpv?: number | null;
-  status?: PatchApiV1CatCareCatsCatIdBloodworkRecordsIdBodyStatus;
 };

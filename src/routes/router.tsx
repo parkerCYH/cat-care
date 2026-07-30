@@ -21,6 +21,7 @@ import { FluidInjectionTable } from '@/pages/fluidInjection/FluidInjectionTable'
 import { FluidInjectionDetail } from '@/pages/fluidInjection/FluidInjectionDetail';
 import { FluidInjectionEdit } from '@/pages/fluidInjection/FluidInjectionEdit';
 import { BloodworkDetail } from '@/pages/bloodwork/BloodworkDetail';
+import { BloodworkPhoto } from '@/pages/bloodwork/BloodworkPhoto';
 import { CatsList } from '@/pages/cats/CatsList';
 import { CatDetail } from '@/pages/cats/CatDetail';
 import { CatNew } from '@/pages/cats/CatNew';
@@ -67,10 +68,15 @@ export const router = createBrowserRouter([
         path: '/fluid-injection/new',
         element: <FluidInjectionNew />,
       },
-      // 票 19 — 手動填寫驗血紀錄(比照原型 VariantA 的手動填寫分支,不含拍照辨識,見票 21)
+      // 票 19 — 手動填寫驗血紀錄(比照原型 VariantA 的手動填寫分支)
       {
         path: '/bloodwork/new',
         element: <BloodworkNew />,
+      },
+      // 票 21 — 拍照辨識驗血紀錄(比照原型 VariantA 的拍照辨識分支)
+      {
+        path: '/bloodwork/photo',
+        element: <BloodworkPhoto />,
       },
       // Issue #7 (排便歷史規格): calendar is the default view, table is the filterable
       // list view; both are top-level siblings, detail/edit are reached from within.
