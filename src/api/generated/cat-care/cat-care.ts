@@ -65,6 +65,14 @@ import type {
   GetApiV1CatCareCatsCatIdBowelMovements403,
   GetApiV1CatCareCatsCatIdBowelMovements404,
   GetApiV1CatCareCatsCatIdBowelMovementsParams,
+  GetApiV1CatCareCatsCatIdConversations200Item,
+  GetApiV1CatCareCatsCatIdConversations401,
+  GetApiV1CatCareCatsCatIdConversations403,
+  GetApiV1CatCareCatsCatIdConversations404,
+  GetApiV1CatCareCatsCatIdConversationsIdMessages200Item,
+  GetApiV1CatCareCatsCatIdConversationsIdMessages401,
+  GetApiV1CatCareCatsCatIdConversationsIdMessages403,
+  GetApiV1CatCareCatsCatIdConversationsIdMessages404,
   GetApiV1CatCareCatsCatIdFluidInjections200Item,
   GetApiV1CatCareCatsCatIdFluidInjections401,
   GetApiV1CatCareCatsCatIdFluidInjections403,
@@ -131,6 +139,15 @@ import type {
   PostApiV1CatCareCatsCatIdBowelMovements403,
   PostApiV1CatCareCatsCatIdBowelMovements404,
   PostApiV1CatCareCatsCatIdBowelMovementsBody,
+  PostApiV1CatCareCatsCatIdConversations201,
+  PostApiV1CatCareCatsCatIdConversations401,
+  PostApiV1CatCareCatsCatIdConversations403,
+  PostApiV1CatCareCatsCatIdConversations404,
+  PostApiV1CatCareCatsCatIdConversationsIdMessages401,
+  PostApiV1CatCareCatsCatIdConversationsIdMessages403,
+  PostApiV1CatCareCatsCatIdConversationsIdMessages404,
+  PostApiV1CatCareCatsCatIdConversationsIdMessages502,
+  PostApiV1CatCareCatsCatIdConversationsIdMessagesBody,
   PostApiV1CatCareCatsCatIdFluidInjections201,
   PostApiV1CatCareCatsCatIdFluidInjections401,
   PostApiV1CatCareCatsCatIdFluidInjections403,
@@ -1937,6 +1954,325 @@ export function useGetApiV1CatCareCatsCatIdBloodworkRecordsIdHealthAdvice<TData 
 
 
 /**
+ * @summary Start a new chat conversation thread for a cat (caller must be a member)
+ */
+export const postApiV1CatCareCatsCatIdConversations = (
+    catId: string,
+ signal?: AbortSignal
+) => {
+      
+      
+      return customInstance<PostApiV1CatCareCatsCatIdConversations201>(
+      {url: `/api/v1/cat-care/cats/${catId}/conversations`, method: 'POST', signal
+    },
+      );
+    }
+  
+
+
+export const getPostApiV1CatCareCatsCatIdConversationsMutationOptions = <TError = ErrorType<PostApiV1CatCareCatsCatIdConversations401 | PostApiV1CatCareCatsCatIdConversations403 | PostApiV1CatCareCatsCatIdConversations404>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postApiV1CatCareCatsCatIdConversations>>, TError,{catId: string}, TContext>, }
+): UseMutationOptions<Awaited<ReturnType<typeof postApiV1CatCareCatsCatIdConversations>>, TError,{catId: string}, TContext> => {
+
+const mutationKey = ['postApiV1CatCareCatsCatIdConversations'];
+const {mutation: mutationOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }};
+
+      
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof postApiV1CatCareCatsCatIdConversations>>, {catId: string}> = (props) => {
+          const {catId} = props ?? {};
+
+          return  postApiV1CatCareCatsCatIdConversations(catId,)
+        }
+
+        
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type PostApiV1CatCareCatsCatIdConversationsMutationResult = NonNullable<Awaited<ReturnType<typeof postApiV1CatCareCatsCatIdConversations>>>
+    
+    export type PostApiV1CatCareCatsCatIdConversationsMutationError = ErrorType<PostApiV1CatCareCatsCatIdConversations401 | PostApiV1CatCareCatsCatIdConversations403 | PostApiV1CatCareCatsCatIdConversations404>
+
+    /**
+ * @summary Start a new chat conversation thread for a cat (caller must be a member)
+ */
+export const usePostApiV1CatCareCatsCatIdConversations = <TError = ErrorType<PostApiV1CatCareCatsCatIdConversations401 | PostApiV1CatCareCatsCatIdConversations403 | PostApiV1CatCareCatsCatIdConversations404>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postApiV1CatCareCatsCatIdConversations>>, TError,{catId: string}, TContext>, }
+ , queryClient?: QueryClient): UseMutationResult<
+        Awaited<ReturnType<typeof postApiV1CatCareCatsCatIdConversations>>,
+        TError,
+        {catId: string},
+        TContext
+      > => {
+
+      const mutationOptions = getPostApiV1CatCareCatsCatIdConversationsMutationOptions(options);
+
+      return useMutation(mutationOptions, queryClient);
+    }
+    /**
+ * @summary List chat conversation threads for a cat, newest first (caller must be a member)
+ */
+export const getApiV1CatCareCatsCatIdConversations = (
+    catId: string,
+ signal?: AbortSignal
+) => {
+      
+      
+      return customInstance<GetApiV1CatCareCatsCatIdConversations200Item[]>(
+      {url: `/api/v1/cat-care/cats/${catId}/conversations`, method: 'GET', signal
+    },
+      );
+    }
+  
+
+
+
+export const getGetApiV1CatCareCatsCatIdConversationsQueryKey = (catId?: string,) => {
+    return [
+    `/api/v1/cat-care/cats/${catId}/conversations`
+    ] as const;
+    }
+
+    
+export const getGetApiV1CatCareCatsCatIdConversationsQueryOptions = <TData = Awaited<ReturnType<typeof getApiV1CatCareCatsCatIdConversations>>, TError = ErrorType<GetApiV1CatCareCatsCatIdConversations401 | GetApiV1CatCareCatsCatIdConversations403 | GetApiV1CatCareCatsCatIdConversations404>>(catId: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getApiV1CatCareCatsCatIdConversations>>, TError, TData>>, }
+) => {
+
+const {query: queryOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getGetApiV1CatCareCatsCatIdConversationsQueryKey(catId);
+
+  
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof getApiV1CatCareCatsCatIdConversations>>> = ({ signal }) => getApiV1CatCareCatsCatIdConversations(catId, signal);
+
+      
+
+      
+
+   return  { queryKey, queryFn, enabled: !!(catId), ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof getApiV1CatCareCatsCatIdConversations>>, TError, TData> & { queryKey: DataTag<QueryKey, TData> }
+}
+
+export type GetApiV1CatCareCatsCatIdConversationsQueryResult = NonNullable<Awaited<ReturnType<typeof getApiV1CatCareCatsCatIdConversations>>>
+export type GetApiV1CatCareCatsCatIdConversationsQueryError = ErrorType<GetApiV1CatCareCatsCatIdConversations401 | GetApiV1CatCareCatsCatIdConversations403 | GetApiV1CatCareCatsCatIdConversations404>
+
+
+export function useGetApiV1CatCareCatsCatIdConversations<TData = Awaited<ReturnType<typeof getApiV1CatCareCatsCatIdConversations>>, TError = ErrorType<GetApiV1CatCareCatsCatIdConversations401 | GetApiV1CatCareCatsCatIdConversations403 | GetApiV1CatCareCatsCatIdConversations404>>(
+ catId: string, options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof getApiV1CatCareCatsCatIdConversations>>, TError, TData>> & Pick<
+        DefinedInitialDataOptions<
+          Awaited<ReturnType<typeof getApiV1CatCareCatsCatIdConversations>>,
+          TError,
+          Awaited<ReturnType<typeof getApiV1CatCareCatsCatIdConversations>>
+        > , 'initialData'
+      >, }
+ , queryClient?: QueryClient
+  ):  DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData> }
+export function useGetApiV1CatCareCatsCatIdConversations<TData = Awaited<ReturnType<typeof getApiV1CatCareCatsCatIdConversations>>, TError = ErrorType<GetApiV1CatCareCatsCatIdConversations401 | GetApiV1CatCareCatsCatIdConversations403 | GetApiV1CatCareCatsCatIdConversations404>>(
+ catId: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getApiV1CatCareCatsCatIdConversations>>, TError, TData>> & Pick<
+        UndefinedInitialDataOptions<
+          Awaited<ReturnType<typeof getApiV1CatCareCatsCatIdConversations>>,
+          TError,
+          Awaited<ReturnType<typeof getApiV1CatCareCatsCatIdConversations>>
+        > , 'initialData'
+      >, }
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData> }
+export function useGetApiV1CatCareCatsCatIdConversations<TData = Awaited<ReturnType<typeof getApiV1CatCareCatsCatIdConversations>>, TError = ErrorType<GetApiV1CatCareCatsCatIdConversations401 | GetApiV1CatCareCatsCatIdConversations403 | GetApiV1CatCareCatsCatIdConversations404>>(
+ catId: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getApiV1CatCareCatsCatIdConversations>>, TError, TData>>, }
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData> }
+/**
+ * @summary List chat conversation threads for a cat, newest first (caller must be a member)
+ */
+
+export function useGetApiV1CatCareCatsCatIdConversations<TData = Awaited<ReturnType<typeof getApiV1CatCareCatsCatIdConversations>>, TError = ErrorType<GetApiV1CatCareCatsCatIdConversations401 | GetApiV1CatCareCatsCatIdConversations403 | GetApiV1CatCareCatsCatIdConversations404>>(
+ catId: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getApiV1CatCareCatsCatIdConversations>>, TError, TData>>, }
+ , queryClient?: QueryClient 
+ ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData> } {
+
+  const queryOptions = getGetApiV1CatCareCatsCatIdConversationsQueryOptions(catId,options)
+
+  const query = useQuery(queryOptions, queryClient) as  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData> };
+
+  query.queryKey = queryOptions.queryKey ;
+
+  return query;
+}
+
+
+
+
+/**
+ * @summary List messages in a conversation thread, oldest first (caller must be a member)
+ */
+export const getApiV1CatCareCatsCatIdConversationsIdMessages = (
+    catId: string,
+    id: string,
+ signal?: AbortSignal
+) => {
+      
+      
+      return customInstance<GetApiV1CatCareCatsCatIdConversationsIdMessages200Item[]>(
+      {url: `/api/v1/cat-care/cats/${catId}/conversations/${id}/messages`, method: 'GET', signal
+    },
+      );
+    }
+  
+
+
+
+export const getGetApiV1CatCareCatsCatIdConversationsIdMessagesQueryKey = (catId?: string,
+    id?: string,) => {
+    return [
+    `/api/v1/cat-care/cats/${catId}/conversations/${id}/messages`
+    ] as const;
+    }
+
+    
+export const getGetApiV1CatCareCatsCatIdConversationsIdMessagesQueryOptions = <TData = Awaited<ReturnType<typeof getApiV1CatCareCatsCatIdConversationsIdMessages>>, TError = ErrorType<GetApiV1CatCareCatsCatIdConversationsIdMessages401 | GetApiV1CatCareCatsCatIdConversationsIdMessages403 | GetApiV1CatCareCatsCatIdConversationsIdMessages404>>(catId: string,
+    id: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getApiV1CatCareCatsCatIdConversationsIdMessages>>, TError, TData>>, }
+) => {
+
+const {query: queryOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getGetApiV1CatCareCatsCatIdConversationsIdMessagesQueryKey(catId,id);
+
+  
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof getApiV1CatCareCatsCatIdConversationsIdMessages>>> = ({ signal }) => getApiV1CatCareCatsCatIdConversationsIdMessages(catId,id, signal);
+
+      
+
+      
+
+   return  { queryKey, queryFn, enabled: !!(catId && id), ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof getApiV1CatCareCatsCatIdConversationsIdMessages>>, TError, TData> & { queryKey: DataTag<QueryKey, TData> }
+}
+
+export type GetApiV1CatCareCatsCatIdConversationsIdMessagesQueryResult = NonNullable<Awaited<ReturnType<typeof getApiV1CatCareCatsCatIdConversationsIdMessages>>>
+export type GetApiV1CatCareCatsCatIdConversationsIdMessagesQueryError = ErrorType<GetApiV1CatCareCatsCatIdConversationsIdMessages401 | GetApiV1CatCareCatsCatIdConversationsIdMessages403 | GetApiV1CatCareCatsCatIdConversationsIdMessages404>
+
+
+export function useGetApiV1CatCareCatsCatIdConversationsIdMessages<TData = Awaited<ReturnType<typeof getApiV1CatCareCatsCatIdConversationsIdMessages>>, TError = ErrorType<GetApiV1CatCareCatsCatIdConversationsIdMessages401 | GetApiV1CatCareCatsCatIdConversationsIdMessages403 | GetApiV1CatCareCatsCatIdConversationsIdMessages404>>(
+ catId: string,
+    id: string, options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof getApiV1CatCareCatsCatIdConversationsIdMessages>>, TError, TData>> & Pick<
+        DefinedInitialDataOptions<
+          Awaited<ReturnType<typeof getApiV1CatCareCatsCatIdConversationsIdMessages>>,
+          TError,
+          Awaited<ReturnType<typeof getApiV1CatCareCatsCatIdConversationsIdMessages>>
+        > , 'initialData'
+      >, }
+ , queryClient?: QueryClient
+  ):  DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData> }
+export function useGetApiV1CatCareCatsCatIdConversationsIdMessages<TData = Awaited<ReturnType<typeof getApiV1CatCareCatsCatIdConversationsIdMessages>>, TError = ErrorType<GetApiV1CatCareCatsCatIdConversationsIdMessages401 | GetApiV1CatCareCatsCatIdConversationsIdMessages403 | GetApiV1CatCareCatsCatIdConversationsIdMessages404>>(
+ catId: string,
+    id: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getApiV1CatCareCatsCatIdConversationsIdMessages>>, TError, TData>> & Pick<
+        UndefinedInitialDataOptions<
+          Awaited<ReturnType<typeof getApiV1CatCareCatsCatIdConversationsIdMessages>>,
+          TError,
+          Awaited<ReturnType<typeof getApiV1CatCareCatsCatIdConversationsIdMessages>>
+        > , 'initialData'
+      >, }
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData> }
+export function useGetApiV1CatCareCatsCatIdConversationsIdMessages<TData = Awaited<ReturnType<typeof getApiV1CatCareCatsCatIdConversationsIdMessages>>, TError = ErrorType<GetApiV1CatCareCatsCatIdConversationsIdMessages401 | GetApiV1CatCareCatsCatIdConversationsIdMessages403 | GetApiV1CatCareCatsCatIdConversationsIdMessages404>>(
+ catId: string,
+    id: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getApiV1CatCareCatsCatIdConversationsIdMessages>>, TError, TData>>, }
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData> }
+/**
+ * @summary List messages in a conversation thread, oldest first (caller must be a member)
+ */
+
+export function useGetApiV1CatCareCatsCatIdConversationsIdMessages<TData = Awaited<ReturnType<typeof getApiV1CatCareCatsCatIdConversationsIdMessages>>, TError = ErrorType<GetApiV1CatCareCatsCatIdConversationsIdMessages401 | GetApiV1CatCareCatsCatIdConversationsIdMessages403 | GetApiV1CatCareCatsCatIdConversationsIdMessages404>>(
+ catId: string,
+    id: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getApiV1CatCareCatsCatIdConversationsIdMessages>>, TError, TData>>, }
+ , queryClient?: QueryClient 
+ ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData> } {
+
+  const queryOptions = getGetApiV1CatCareCatsCatIdConversationsIdMessagesQueryOptions(catId,id,options)
+
+  const query = useQuery(queryOptions, queryClient) as  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData> };
+
+  query.queryKey = queryOptions.queryKey ;
+
+  return query;
+}
+
+
+
+
+/**
+ * @summary Send a message in a conversation; synchronously streams eve's reply back chunk by chunk (票 15 定案), then persists the full assistant reply once the stream ends
+ */
+export const postApiV1CatCareCatsCatIdConversationsIdMessages = (
+    catId: string,
+    id: string,
+    postApiV1CatCareCatsCatIdConversationsIdMessagesBody: PostApiV1CatCareCatsCatIdConversationsIdMessagesBody,
+ signal?: AbortSignal
+) => {
+      
+      
+      return customInstance<void>(
+      {url: `/api/v1/cat-care/cats/${catId}/conversations/${id}/messages`, method: 'POST',
+      headers: {'Content-Type': 'application/json', },
+      data: postApiV1CatCareCatsCatIdConversationsIdMessagesBody, signal
+    },
+      );
+    }
+  
+
+
+export const getPostApiV1CatCareCatsCatIdConversationsIdMessagesMutationOptions = <TError = ErrorType<PostApiV1CatCareCatsCatIdConversationsIdMessages401 | PostApiV1CatCareCatsCatIdConversationsIdMessages403 | PostApiV1CatCareCatsCatIdConversationsIdMessages404 | PostApiV1CatCareCatsCatIdConversationsIdMessages502>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postApiV1CatCareCatsCatIdConversationsIdMessages>>, TError,{catId: string;id: string;data: PostApiV1CatCareCatsCatIdConversationsIdMessagesBody}, TContext>, }
+): UseMutationOptions<Awaited<ReturnType<typeof postApiV1CatCareCatsCatIdConversationsIdMessages>>, TError,{catId: string;id: string;data: PostApiV1CatCareCatsCatIdConversationsIdMessagesBody}, TContext> => {
+
+const mutationKey = ['postApiV1CatCareCatsCatIdConversationsIdMessages'];
+const {mutation: mutationOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }};
+
+      
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof postApiV1CatCareCatsCatIdConversationsIdMessages>>, {catId: string;id: string;data: PostApiV1CatCareCatsCatIdConversationsIdMessagesBody}> = (props) => {
+          const {catId,id,data} = props ?? {};
+
+          return  postApiV1CatCareCatsCatIdConversationsIdMessages(catId,id,data,)
+        }
+
+        
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type PostApiV1CatCareCatsCatIdConversationsIdMessagesMutationResult = NonNullable<Awaited<ReturnType<typeof postApiV1CatCareCatsCatIdConversationsIdMessages>>>
+    export type PostApiV1CatCareCatsCatIdConversationsIdMessagesMutationBody = PostApiV1CatCareCatsCatIdConversationsIdMessagesBody
+    export type PostApiV1CatCareCatsCatIdConversationsIdMessagesMutationError = ErrorType<PostApiV1CatCareCatsCatIdConversationsIdMessages401 | PostApiV1CatCareCatsCatIdConversationsIdMessages403 | PostApiV1CatCareCatsCatIdConversationsIdMessages404 | PostApiV1CatCareCatsCatIdConversationsIdMessages502>
+
+    /**
+ * @summary Send a message in a conversation; synchronously streams eve's reply back chunk by chunk (票 15 定案), then persists the full assistant reply once the stream ends
+ */
+export const usePostApiV1CatCareCatsCatIdConversationsIdMessages = <TError = ErrorType<PostApiV1CatCareCatsCatIdConversationsIdMessages401 | PostApiV1CatCareCatsCatIdConversationsIdMessages403 | PostApiV1CatCareCatsCatIdConversationsIdMessages404 | PostApiV1CatCareCatsCatIdConversationsIdMessages502>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postApiV1CatCareCatsCatIdConversationsIdMessages>>, TError,{catId: string;id: string;data: PostApiV1CatCareCatsCatIdConversationsIdMessagesBody}, TContext>, }
+ , queryClient?: QueryClient): UseMutationResult<
+        Awaited<ReturnType<typeof postApiV1CatCareCatsCatIdConversationsIdMessages>>,
+        TError,
+        {catId: string;id: string;data: PostApiV1CatCareCatsCatIdConversationsIdMessagesBody},
+        TContext
+      > => {
+
+      const mutationOptions = getPostApiV1CatCareCatsCatIdConversationsIdMessagesMutationOptions(options);
+
+      return useMutation(mutationOptions, queryClient);
+    }
+    /**
  * @summary eve → parker-api callback for a photo-recognition job (service-to-service; verified by shared key, not Player auth)
  */
 export const postApiV1CatCareEveCallbackBloodworkRecognitionJobId = (

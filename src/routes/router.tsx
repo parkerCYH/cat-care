@@ -24,6 +24,8 @@ import { BloodworkDetail } from '@/pages/bloodwork/BloodworkDetail';
 import { BloodworkPhoto } from '@/pages/bloodwork/BloodworkPhoto';
 import { BloodworkTable } from '@/pages/bloodwork/BloodworkTable';
 import { BloodworkHealthAdvice } from '@/pages/bloodwork/BloodworkHealthAdvice';
+import { ChatList } from '@/pages/chat/ChatList';
+import { ChatConversation } from '@/pages/chat/ChatConversation';
 import { CatsList } from '@/pages/cats/CatsList';
 import { CatDetail } from '@/pages/cats/CatDetail';
 import { CatNew } from '@/pages/cats/CatNew';
@@ -140,6 +142,15 @@ export const router = createBrowserRouter([
       {
         path: '/bloodwork/health-advice',
         element: <BloodworkHealthAdvice />,
+      },
+      // 票 25 — 聊天(票 16 定案變體 C:扁平列表＋建立時選貓＋沉浸式串流)
+      {
+        path: '/chat',
+        element: <ChatList />,
+      },
+      {
+        path: '/chat/:catId/:id',
+        element: <ChatConversation />,
       },
       // issue #9 — cat management (list/detail/create/edit + player invite/leave/chip-
       // custodian transfer). See docs/agents/init-frontend.md for the multi-agent build

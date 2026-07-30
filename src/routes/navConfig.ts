@@ -21,5 +21,7 @@ export const navItems: NavItem[] = [
   { label: '體重歷史', path: '/weight/chart' },
   { label: '點滴歷史', path: '/fluid-injection/table' },
   { label: '驗血歷史', path: '/bloodwork/table' },
+  // 票 25 — 聊天(票 15 定案:獨立導覽入口,不掛在任何貓咪詳情頁底下)
+  { label: '聊天', path: '/chat' },
   { label: '貓咪管理', path: '/cats' },
 ];

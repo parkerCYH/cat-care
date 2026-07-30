@@ -599,6 +599,60 @@ export const getApiV1CatCareCatsCatIdBloodworkRecordsIdHealthAdviceResponseItem 
 export const getApiV1CatCareCatsCatIdBloodworkRecordsIdHealthAdviceResponse = zod.array(getApiV1CatCareCatsCatIdBloodworkRecordsIdHealthAdviceResponseItem)
 
 /**
+ * @summary Start a new chat conversation thread for a cat (caller must be a member)
+ */
+export const postApiV1CatCareCatsCatIdConversationsParams = zod.object({
+  "catId": zod.string().uuid()
+})
+
+/**
+ * @summary List chat conversation threads for a cat, newest first (caller must be a member)
+ */
+export const getApiV1CatCareCatsCatIdConversationsParams = zod.object({
+  "catId": zod.string().uuid()
+})
+
+export const getApiV1CatCareCatsCatIdConversationsResponseItem = zod.object({
+  "id": zod.string().uuid(),
+  "catId": zod.string().uuid(),
+  "createdBy": zod.string().uuid(),
+  "createdAt": zod.string()
+})
+export const getApiV1CatCareCatsCatIdConversationsResponse = zod.array(getApiV1CatCareCatsCatIdConversationsResponseItem)
+
+/**
+ * @summary List messages in a conversation thread, oldest first (caller must be a member)
+ */
+export const getApiV1CatCareCatsCatIdConversationsIdMessagesParams = zod.object({
+  "catId": zod.string().uuid(),
+  "id": zod.string().uuid()
+})
+
+export const getApiV1CatCareCatsCatIdConversationsIdMessagesResponseItem = zod.object({
+  "id": zod.string().uuid(),
+  "conversationId": zod.string().uuid(),
+  "role": zod.enum(['user', 'assistant']),
+  "content": zod.string(),
+  "createdAt": zod.string()
+})
+export const getApiV1CatCareCatsCatIdConversationsIdMessagesResponse = zod.array(getApiV1CatCareCatsCatIdConversationsIdMessagesResponseItem)
+
+/**
+ * @summary Send a message in a conversation; synchronously streams eve's reply back chunk by chunk (票 15 定案), then persists the full assistant reply once the stream ends
+ */
+export const postApiV1CatCareCatsCatIdConversationsIdMessagesParams = zod.object({
+  "catId": zod.string().uuid(),
+  "id": zod.string().uuid()
+})
+
+
+
+
+export const postApiV1CatCareCatsCatIdConversationsIdMessagesBody = zod.object({
+  "content": zod.string().min(1)
+})
+
+/**
  * @summary eve → parker-api callback for a photo-recognition job (service-to-service; verified by shared key, not Player auth)
  */
 export const postApiV1CatCareEveCallbackBloodworkRecognitionJobIdParams = zod.object({
