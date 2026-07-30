@@ -552,6 +552,53 @@ export const postApiV1CatCareCatsCatIdBloodworkRecordsRecognizeBody = zod.object
 })
 
 /**
+ * @summary Get AI-generated health advice for one or more bloodwork records (synchronous; caller must be a member)
+ */
+export const postApiV1CatCareCatsCatIdBloodworkRecordsHealthAdviceParams = zod.object({
+  "catId": zod.string().uuid()
+})
+
+
+
+
+export const postApiV1CatCareCatsCatIdBloodworkRecordsHealthAdviceBody = zod.object({
+  "bloodworkRecordIds": zod.array(zod.string().uuid()).min(1)
+})
+
+export const postApiV1CatCareCatsCatIdBloodworkRecordsHealthAdviceResponse = zod.object({
+  "id": zod.string().uuid(),
+  "requestedBy": zod.string().uuid(),
+  "advice": zod.object({
+  "abnormalFindings": zod.array(zod.string()),
+  "possibleCauses": zod.array(zod.string()),
+  "recommendedActions": zod.array(zod.string())
+}),
+  "bloodworkRecordIds": zod.array(zod.string().uuid()),
+  "createdAt": zod.string()
+})
+
+/**
+ * @summary List previously generated health advice for a bloodwork record (票 23; avoids re-calling eve)
+ */
+export const getApiV1CatCareCatsCatIdBloodworkRecordsIdHealthAdviceParams = zod.object({
+  "catId": zod.string().uuid(),
+  "id": zod.string().uuid()
+})
+
+export const getApiV1CatCareCatsCatIdBloodworkRecordsIdHealthAdviceResponseItem = zod.object({
+  "id": zod.string().uuid(),
+  "requestedBy": zod.string().uuid(),
+  "advice": zod.object({
+  "abnormalFindings": zod.array(zod.string()),
+  "possibleCauses": zod.array(zod.string()),
+  "recommendedActions": zod.array(zod.string())
+}),
+  "bloodworkRecordIds": zod.array(zod.string().uuid()),
+  "createdAt": zod.string()
+})
+export const getApiV1CatCareCatsCatIdBloodworkRecordsIdHealthAdviceResponse = zod.array(getApiV1CatCareCatsCatIdBloodworkRecordsIdHealthAdviceResponseItem)
+
+/**
  * @summary eve → parker-api callback for a photo-recognition job (service-to-service; verified by shared key, not Player auth)
  */
 export const postApiV1CatCareEveCallbackBloodworkRecognitionJobIdParams = zod.object({

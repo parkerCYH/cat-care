@@ -22,6 +22,8 @@ import { FluidInjectionDetail } from '@/pages/fluidInjection/FluidInjectionDetai
 import { FluidInjectionEdit } from '@/pages/fluidInjection/FluidInjectionEdit';
 import { BloodworkDetail } from '@/pages/bloodwork/BloodworkDetail';
 import { BloodworkPhoto } from '@/pages/bloodwork/BloodworkPhoto';
+import { BloodworkTable } from '@/pages/bloodwork/BloodworkTable';
+import { BloodworkHealthAdvice } from '@/pages/bloodwork/BloodworkHealthAdvice';
 import { CatsList } from '@/pages/cats/CatsList';
 import { CatDetail } from '@/pages/cats/CatDetail';
 import { CatNew } from '@/pages/cats/CatNew';
@@ -129,6 +131,15 @@ export const router = createBrowserRouter([
       {
         path: '/bloodwork/:id',
         element: <BloodworkDetail />,
+      },
+      // 票 23 — 驗血歷史列表(多選)與取得健康建議的觸發＋結果頁
+      {
+        path: '/bloodwork/table',
+        element: <BloodworkTable />,
+      },
+      {
+        path: '/bloodwork/health-advice',
+        element: <BloodworkHealthAdvice />,
       },
       // issue #9 — cat management (list/detail/create/edit + player invite/leave/chip-
       // custodian transfer). See docs/agents/init-frontend.md for the multi-agent build

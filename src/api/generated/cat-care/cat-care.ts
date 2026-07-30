@@ -55,6 +55,10 @@ import type {
   GetApiV1CatCareCatsCatIdBloodworkRecords401,
   GetApiV1CatCareCatsCatIdBloodworkRecords403,
   GetApiV1CatCareCatsCatIdBloodworkRecords404,
+  GetApiV1CatCareCatsCatIdBloodworkRecordsIdHealthAdvice200Item,
+  GetApiV1CatCareCatsCatIdBloodworkRecordsIdHealthAdvice401,
+  GetApiV1CatCareCatsCatIdBloodworkRecordsIdHealthAdvice403,
+  GetApiV1CatCareCatsCatIdBloodworkRecordsIdHealthAdvice404,
   GetApiV1CatCareCatsCatIdBloodworkRecordsParams,
   GetApiV1CatCareCatsCatIdBowelMovements200Item,
   GetApiV1CatCareCatsCatIdBowelMovements401,
@@ -110,6 +114,12 @@ import type {
   PostApiV1CatCareCatsCatIdBloodworkRecords403,
   PostApiV1CatCareCatsCatIdBloodworkRecords404,
   PostApiV1CatCareCatsCatIdBloodworkRecordsBody,
+  PostApiV1CatCareCatsCatIdBloodworkRecordsHealthAdvice200,
+  PostApiV1CatCareCatsCatIdBloodworkRecordsHealthAdvice401,
+  PostApiV1CatCareCatsCatIdBloodworkRecordsHealthAdvice403,
+  PostApiV1CatCareCatsCatIdBloodworkRecordsHealthAdvice404,
+  PostApiV1CatCareCatsCatIdBloodworkRecordsHealthAdvice502,
+  PostApiV1CatCareCatsCatIdBloodworkRecordsHealthAdviceBody,
   PostApiV1CatCareCatsCatIdBloodworkRecordsRecognize202,
   PostApiV1CatCareCatsCatIdBloodworkRecordsRecognize401,
   PostApiV1CatCareCatsCatIdBloodworkRecordsRecognize403,
@@ -1763,6 +1773,170 @@ export const usePostApiV1CatCareCatsCatIdBloodworkRecordsRecognize = <TError = E
       return useMutation(mutationOptions, queryClient);
     }
     /**
+ * @summary Get AI-generated health advice for one or more bloodwork records (synchronous; caller must be a member)
+ */
+export const postApiV1CatCareCatsCatIdBloodworkRecordsHealthAdvice = (
+    catId: string,
+    postApiV1CatCareCatsCatIdBloodworkRecordsHealthAdviceBody: PostApiV1CatCareCatsCatIdBloodworkRecordsHealthAdviceBody,
+ signal?: AbortSignal
+) => {
+      
+      
+      return customInstance<PostApiV1CatCareCatsCatIdBloodworkRecordsHealthAdvice200>(
+      {url: `/api/v1/cat-care/cats/${catId}/bloodwork-records/health-advice`, method: 'POST',
+      headers: {'Content-Type': 'application/json', },
+      data: postApiV1CatCareCatsCatIdBloodworkRecordsHealthAdviceBody, signal
+    },
+      );
+    }
+  
+
+
+export const getPostApiV1CatCareCatsCatIdBloodworkRecordsHealthAdviceMutationOptions = <TError = ErrorType<PostApiV1CatCareCatsCatIdBloodworkRecordsHealthAdvice401 | PostApiV1CatCareCatsCatIdBloodworkRecordsHealthAdvice403 | PostApiV1CatCareCatsCatIdBloodworkRecordsHealthAdvice404 | PostApiV1CatCareCatsCatIdBloodworkRecordsHealthAdvice502>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postApiV1CatCareCatsCatIdBloodworkRecordsHealthAdvice>>, TError,{catId: string;data: PostApiV1CatCareCatsCatIdBloodworkRecordsHealthAdviceBody}, TContext>, }
+): UseMutationOptions<Awaited<ReturnType<typeof postApiV1CatCareCatsCatIdBloodworkRecordsHealthAdvice>>, TError,{catId: string;data: PostApiV1CatCareCatsCatIdBloodworkRecordsHealthAdviceBody}, TContext> => {
+
+const mutationKey = ['postApiV1CatCareCatsCatIdBloodworkRecordsHealthAdvice'];
+const {mutation: mutationOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }};
+
+      
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof postApiV1CatCareCatsCatIdBloodworkRecordsHealthAdvice>>, {catId: string;data: PostApiV1CatCareCatsCatIdBloodworkRecordsHealthAdviceBody}> = (props) => {
+          const {catId,data} = props ?? {};
+
+          return  postApiV1CatCareCatsCatIdBloodworkRecordsHealthAdvice(catId,data,)
+        }
+
+        
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type PostApiV1CatCareCatsCatIdBloodworkRecordsHealthAdviceMutationResult = NonNullable<Awaited<ReturnType<typeof postApiV1CatCareCatsCatIdBloodworkRecordsHealthAdvice>>>
+    export type PostApiV1CatCareCatsCatIdBloodworkRecordsHealthAdviceMutationBody = PostApiV1CatCareCatsCatIdBloodworkRecordsHealthAdviceBody
+    export type PostApiV1CatCareCatsCatIdBloodworkRecordsHealthAdviceMutationError = ErrorType<PostApiV1CatCareCatsCatIdBloodworkRecordsHealthAdvice401 | PostApiV1CatCareCatsCatIdBloodworkRecordsHealthAdvice403 | PostApiV1CatCareCatsCatIdBloodworkRecordsHealthAdvice404 | PostApiV1CatCareCatsCatIdBloodworkRecordsHealthAdvice502>
+
+    /**
+ * @summary Get AI-generated health advice for one or more bloodwork records (synchronous; caller must be a member)
+ */
+export const usePostApiV1CatCareCatsCatIdBloodworkRecordsHealthAdvice = <TError = ErrorType<PostApiV1CatCareCatsCatIdBloodworkRecordsHealthAdvice401 | PostApiV1CatCareCatsCatIdBloodworkRecordsHealthAdvice403 | PostApiV1CatCareCatsCatIdBloodworkRecordsHealthAdvice404 | PostApiV1CatCareCatsCatIdBloodworkRecordsHealthAdvice502>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postApiV1CatCareCatsCatIdBloodworkRecordsHealthAdvice>>, TError,{catId: string;data: PostApiV1CatCareCatsCatIdBloodworkRecordsHealthAdviceBody}, TContext>, }
+ , queryClient?: QueryClient): UseMutationResult<
+        Awaited<ReturnType<typeof postApiV1CatCareCatsCatIdBloodworkRecordsHealthAdvice>>,
+        TError,
+        {catId: string;data: PostApiV1CatCareCatsCatIdBloodworkRecordsHealthAdviceBody},
+        TContext
+      > => {
+
+      const mutationOptions = getPostApiV1CatCareCatsCatIdBloodworkRecordsHealthAdviceMutationOptions(options);
+
+      return useMutation(mutationOptions, queryClient);
+    }
+    /**
+ * @summary List previously generated health advice for a bloodwork record (票 23; avoids re-calling eve)
+ */
+export const getApiV1CatCareCatsCatIdBloodworkRecordsIdHealthAdvice = (
+    catId: string,
+    id: string,
+ signal?: AbortSignal
+) => {
+      
+      
+      return customInstance<GetApiV1CatCareCatsCatIdBloodworkRecordsIdHealthAdvice200Item[]>(
+      {url: `/api/v1/cat-care/cats/${catId}/bloodwork-records/${id}/health-advice`, method: 'GET', signal
+    },
+      );
+    }
+  
+
+
+
+export const getGetApiV1CatCareCatsCatIdBloodworkRecordsIdHealthAdviceQueryKey = (catId?: string,
+    id?: string,) => {
+    return [
+    `/api/v1/cat-care/cats/${catId}/bloodwork-records/${id}/health-advice`
+    ] as const;
+    }
+
+    
+export const getGetApiV1CatCareCatsCatIdBloodworkRecordsIdHealthAdviceQueryOptions = <TData = Awaited<ReturnType<typeof getApiV1CatCareCatsCatIdBloodworkRecordsIdHealthAdvice>>, TError = ErrorType<GetApiV1CatCareCatsCatIdBloodworkRecordsIdHealthAdvice401 | GetApiV1CatCareCatsCatIdBloodworkRecordsIdHealthAdvice403 | GetApiV1CatCareCatsCatIdBloodworkRecordsIdHealthAdvice404>>(catId: string,
+    id: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getApiV1CatCareCatsCatIdBloodworkRecordsIdHealthAdvice>>, TError, TData>>, }
+) => {
+
+const {query: queryOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getGetApiV1CatCareCatsCatIdBloodworkRecordsIdHealthAdviceQueryKey(catId,id);
+
+  
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof getApiV1CatCareCatsCatIdBloodworkRecordsIdHealthAdvice>>> = ({ signal }) => getApiV1CatCareCatsCatIdBloodworkRecordsIdHealthAdvice(catId,id, signal);
+
+      
+
+      
+
+   return  { queryKey, queryFn, enabled: !!(catId && id), ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof getApiV1CatCareCatsCatIdBloodworkRecordsIdHealthAdvice>>, TError, TData> & { queryKey: DataTag<QueryKey, TData> }
+}
+
+export type GetApiV1CatCareCatsCatIdBloodworkRecordsIdHealthAdviceQueryResult = NonNullable<Awaited<ReturnType<typeof getApiV1CatCareCatsCatIdBloodworkRecordsIdHealthAdvice>>>
+export type GetApiV1CatCareCatsCatIdBloodworkRecordsIdHealthAdviceQueryError = ErrorType<GetApiV1CatCareCatsCatIdBloodworkRecordsIdHealthAdvice401 | GetApiV1CatCareCatsCatIdBloodworkRecordsIdHealthAdvice403 | GetApiV1CatCareCatsCatIdBloodworkRecordsIdHealthAdvice404>
+
+
+export function useGetApiV1CatCareCatsCatIdBloodworkRecordsIdHealthAdvice<TData = Awaited<ReturnType<typeof getApiV1CatCareCatsCatIdBloodworkRecordsIdHealthAdvice>>, TError = ErrorType<GetApiV1CatCareCatsCatIdBloodworkRecordsIdHealthAdvice401 | GetApiV1CatCareCatsCatIdBloodworkRecordsIdHealthAdvice403 | GetApiV1CatCareCatsCatIdBloodworkRecordsIdHealthAdvice404>>(
+ catId: string,
+    id: string, options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof getApiV1CatCareCatsCatIdBloodworkRecordsIdHealthAdvice>>, TError, TData>> & Pick<
+        DefinedInitialDataOptions<
+          Awaited<ReturnType<typeof getApiV1CatCareCatsCatIdBloodworkRecordsIdHealthAdvice>>,
+          TError,
+          Awaited<ReturnType<typeof getApiV1CatCareCatsCatIdBloodworkRecordsIdHealthAdvice>>
+        > , 'initialData'
+      >, }
+ , queryClient?: QueryClient
+  ):  DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData> }
+export function useGetApiV1CatCareCatsCatIdBloodworkRecordsIdHealthAdvice<TData = Awaited<ReturnType<typeof getApiV1CatCareCatsCatIdBloodworkRecordsIdHealthAdvice>>, TError = ErrorType<GetApiV1CatCareCatsCatIdBloodworkRecordsIdHealthAdvice401 | GetApiV1CatCareCatsCatIdBloodworkRecordsIdHealthAdvice403 | GetApiV1CatCareCatsCatIdBloodworkRecordsIdHealthAdvice404>>(
+ catId: string,
+    id: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getApiV1CatCareCatsCatIdBloodworkRecordsIdHealthAdvice>>, TError, TData>> & Pick<
+        UndefinedInitialDataOptions<
+          Awaited<ReturnType<typeof getApiV1CatCareCatsCatIdBloodworkRecordsIdHealthAdvice>>,
+          TError,
+          Awaited<ReturnType<typeof getApiV1CatCareCatsCatIdBloodworkRecordsIdHealthAdvice>>
+        > , 'initialData'
+      >, }
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData> }
+export function useGetApiV1CatCareCatsCatIdBloodworkRecordsIdHealthAdvice<TData = Awaited<ReturnType<typeof getApiV1CatCareCatsCatIdBloodworkRecordsIdHealthAdvice>>, TError = ErrorType<GetApiV1CatCareCatsCatIdBloodworkRecordsIdHealthAdvice401 | GetApiV1CatCareCatsCatIdBloodworkRecordsIdHealthAdvice403 | GetApiV1CatCareCatsCatIdBloodworkRecordsIdHealthAdvice404>>(
+ catId: string,
+    id: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getApiV1CatCareCatsCatIdBloodworkRecordsIdHealthAdvice>>, TError, TData>>, }
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData> }
+/**
+ * @summary List previously generated health advice for a bloodwork record (票 23; avoids re-calling eve)
+ */
+
+export function useGetApiV1CatCareCatsCatIdBloodworkRecordsIdHealthAdvice<TData = Awaited<ReturnType<typeof getApiV1CatCareCatsCatIdBloodworkRecordsIdHealthAdvice>>, TError = ErrorType<GetApiV1CatCareCatsCatIdBloodworkRecordsIdHealthAdvice401 | GetApiV1CatCareCatsCatIdBloodworkRecordsIdHealthAdvice403 | GetApiV1CatCareCatsCatIdBloodworkRecordsIdHealthAdvice404>>(
+ catId: string,
+    id: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getApiV1CatCareCatsCatIdBloodworkRecordsIdHealthAdvice>>, TError, TData>>, }
+ , queryClient?: QueryClient 
+ ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData> } {
+
+  const queryOptions = getGetApiV1CatCareCatsCatIdBloodworkRecordsIdHealthAdviceQueryOptions(catId,id,options)
+
+  const query = useQuery(queryOptions, queryClient) as  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData> };
+
+  query.queryKey = queryOptions.queryKey ;
+
+  return query;
+}
+
+
+
+
+/**
  * @summary eve → parker-api callback for a photo-recognition job (service-to-service; verified by shared key, not Player auth)
  */
 export const postApiV1CatCareEveCallbackBloodworkRecognitionJobId = (

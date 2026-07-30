@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useQueryClient } from '@tanstack/react-query';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -7,9 +7,12 @@ import { z } from 'zod';
 import {
   getGetApiV1CatCareCatsCatIdBloodworkRecordsQueryKey,
   useGetApiV1CatCareCatsCatIdBloodworkRecords,
+  useGetApiV1CatCareCatsCatIdBloodworkRecordsIdHealthAdvice,
   usePatchApiV1CatCareCatsCatIdBloodworkRecordsId,
 } from '@/api/generated/cat-care/cat-care';
 import { patchApiV1CatCareCatsCatIdBloodworkRecordsIdBody } from '@/api/generated-zod/cat-care/cat-care';
+import { HealthAdviceCard } from '@/components/HealthAdviceCard';
+import { RetryButton } from '@/components/RetryState/RetryButton';
 import { useCurrentCat } from '@/hooks/useCurrentCat';
 import { useCurrentUserId } from '@/lib/currentUser';
 import { BIOCHEM_FIELDS, BLOODWORK_FIELDS, CBC_FIELDS, formatBloodworkValue, type BloodworkField } from '@/lib/bloodwork';
@@ -44,6 +47,7 @@ type ConfirmFormValues = z.infer<typeof confirmFormSchema>;
  */
 export function BloodworkDetail() {
   const { id } = useParams<{ id: string }>();
+  const navigate = useNavigate();
   const queryClient = useQueryClient();
   const { catId, isLoading: isCatLoading } = useCurrentCat();
   const currentUserId = useCurrentUserId();
@@ -51,6 +55,16 @@ export function BloodworkDetail() {
 
   const { data: records, isLoading } = useGetApiV1CatCareCatsCatIdBloodworkRecords(catId ?? '', undefined, {
     query: { enabled: !!catId },
+  });
+
+  // 票 23:歷史建議查詢——已產生過的建議直接從這支 GET 端點的快取結果顯示,不重新呼叫 eve/Gemini。
+  const {
+    data: adviceHistory,
+    isLoading: isAdviceHistoryLoading,
+    isError: isAdviceHistoryError,
+    refetch: refetchAdviceHistory,
+  } = useGetApiV1CatCareCatsCatIdBloodworkRecordsIdHealthAdvice(catId ?? '', id ?? '', {
+    query: { enabled: !!catId && !!id },
   });
 
   const record = useMemo(() => records?.find((item) => item.id === id), [records, id]);
@@ -154,6 +168,34 @@ export function BloodworkDetail() {
           </button>
         )}
       </form>
+
+      <div className="flex flex-col gap-3">
+        <div className="flex items-center justify-between">
+          <h2 className="text-sm font-medium text-gray-700">AI 健康建議</h2>
+          <button
+            type="button"
+            onClick={() => navigate('/bloodwork/health-advice', { state: { bloodworkRecordIds: [id] } })}
+            className="rounded-full border border-gray-900 px-3 py-1.5 text-xs font-medium text-gray-900"
+          >
+            取得建議
+          </button>
+        </div>
+
+        {isAdviceHistoryLoading && <p className="text-sm text-gray-400">載入建議歷史中…</p>}
+
+        {isAdviceHistoryError && (
+          <div className="flex items-center gap-2">
+            <p className="text-sm font-medium text-red-600">建議歷史載入失敗</p>
+            <RetryButton onRetry={() => refetchAdviceHistory()} />
+          </div>
+        )}
+
+        {adviceHistory?.length === 0 && <p className="text-sm text-gray-400">還沒有產生過建議</p>}
+
+        {adviceHistory?.map((item) => (
+          <HealthAdviceCard key={item.id} advice={item.advice} createdAt={item.createdAt} />
+        ))}
+      </div>
     </div>
   );
 }

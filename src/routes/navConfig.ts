@@ -20,5 +20,6 @@ export const navItems: NavItem[] = [
   // the chart page, not the hamburger menu, to keep the menu to one entry per feature.
   { label: '體重歷史', path: '/weight/chart' },
   { label: '點滴歷史', path: '/fluid-injection/table' },
+  { label: '驗血歷史', path: '/bloodwork/table' },
   { label: '貓咪管理', path: '/cats' },
 ];
