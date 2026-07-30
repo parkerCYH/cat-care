@@ -342,6 +342,204 @@ export const deleteApiV1CatCareCatsCatIdFluidInjectionsIdParams = zod.object({
 })
 
 /**
+ * @summary Manually record a bloodwork report for a cat (always created as confirmed)
+ */
+export const postApiV1CatCareCatsCatIdBloodworkRecordsParams = zod.object({
+  "catId": zod.string().uuid()
+})
+
+export const postApiV1CatCareCatsCatIdBloodworkRecordsBody = zod.object({
+  "recordedAt": zod.string().datetime({}).optional(),
+  "glu": zod.number().nullish(),
+  "crea": zod.number().nullish(),
+  "bun": zod.number().nullish(),
+  "bunCrea": zod.number().nullish(),
+  "tp": zod.number().nullish(),
+  "alb": zod.number().nullish(),
+  "glob": zod.number().nullish(),
+  "albGlob": zod.number().nullish(),
+  "alt": zod.number().nullish(),
+  "alkp": zod.number().nullish(),
+  "fpl": zod.number().nullish(),
+  "na": zod.number().nullish(),
+  "k": zod.number().nullish(),
+  "naK": zod.number().nullish(),
+  "cl": zod.number().nullish(),
+  "osmCalc": zod.number().nullish(),
+  "tt4": zod.number().nullish(),
+  "wbc": zod.number().nullish(),
+  "lym": zod.number().nullish(),
+  "mono": zod.number().nullish(),
+  "gran": zod.number().nullish(),
+  "lymPercent": zod.number().nullish(),
+  "monPercent": zod.number().nullish(),
+  "graPercent": zod.number().nullish(),
+  "hgb": zod.number().nullish(),
+  "hct": zod.number().nullish(),
+  "rbc": zod.number().nullish(),
+  "mcv": zod.number().nullish(),
+  "mch": zod.number().nullish(),
+  "mchc": zod.number().nullish(),
+  "rdwPercent": zod.number().nullish(),
+  "rdwa": zod.number().nullish(),
+  "plt": zod.number().nullish(),
+  "mpv": zod.number().nullish()
+})
+
+/**
+ * @summary List bloodwork records for a cat (optionally filtered by ?from=&to= date range)
+ */
+export const getApiV1CatCareCatsCatIdBloodworkRecordsParams = zod.object({
+  "catId": zod.string().uuid()
+})
+
+export const getApiV1CatCareCatsCatIdBloodworkRecordsQueryParams = zod.object({
+  "from": zod.string().date().optional(),
+  "to": zod.string().date().optional()
+})
+
+export const getApiV1CatCareCatsCatIdBloodworkRecordsResponseItem = zod.object({
+  "id": zod.string().uuid(),
+  "catId": zod.string().uuid(),
+  "recordedBy": zod.string().uuid(),
+  "recordedAt": zod.string(),
+  "status": zod.enum(['draft', 'confirmed']),
+  "createdAt": zod.string(),
+  "glu": zod.number().nullish(),
+  "crea": zod.number().nullish(),
+  "bun": zod.number().nullish(),
+  "bunCrea": zod.number().nullish(),
+  "tp": zod.number().nullish(),
+  "alb": zod.number().nullish(),
+  "glob": zod.number().nullish(),
+  "albGlob": zod.number().nullish(),
+  "alt": zod.number().nullish(),
+  "alkp": zod.number().nullish(),
+  "fpl": zod.number().nullish(),
+  "na": zod.number().nullish(),
+  "k": zod.number().nullish(),
+  "naK": zod.number().nullish(),
+  "cl": zod.number().nullish(),
+  "osmCalc": zod.number().nullish(),
+  "tt4": zod.number().nullish(),
+  "wbc": zod.number().nullish(),
+  "lym": zod.number().nullish(),
+  "mono": zod.number().nullish(),
+  "gran": zod.number().nullish(),
+  "lymPercent": zod.number().nullish(),
+  "monPercent": zod.number().nullish(),
+  "graPercent": zod.number().nullish(),
+  "hgb": zod.number().nullish(),
+  "hct": zod.number().nullish(),
+  "rbc": zod.number().nullish(),
+  "mcv": zod.number().nullish(),
+  "mch": zod.number().nullish(),
+  "mchc": zod.number().nullish(),
+  "rdwPercent": zod.number().nullish(),
+  "rdwa": zod.number().nullish(),
+  "plt": zod.number().nullish(),
+  "mpv": zod.number().nullish()
+})
+export const getApiV1CatCareCatsCatIdBloodworkRecordsResponse = zod.array(getApiV1CatCareCatsCatIdBloodworkRecordsResponseItem)
+
+/**
+ * @summary Edit a bloodwork record's fields (only the recording Player may edit)
+ */
+export const patchApiV1CatCareCatsCatIdBloodworkRecordsIdParams = zod.object({
+  "catId": zod.string().uuid(),
+  "id": zod.string().uuid()
+})
+
+export const patchApiV1CatCareCatsCatIdBloodworkRecordsIdBody = zod.object({
+  "recordedAt": zod.string().datetime({}).optional(),
+  "glu": zod.number().nullish(),
+  "crea": zod.number().nullish(),
+  "bun": zod.number().nullish(),
+  "bunCrea": zod.number().nullish(),
+  "tp": zod.number().nullish(),
+  "alb": zod.number().nullish(),
+  "glob": zod.number().nullish(),
+  "albGlob": zod.number().nullish(),
+  "alt": zod.number().nullish(),
+  "alkp": zod.number().nullish(),
+  "fpl": zod.number().nullish(),
+  "na": zod.number().nullish(),
+  "k": zod.number().nullish(),
+  "naK": zod.number().nullish(),
+  "cl": zod.number().nullish(),
+  "osmCalc": zod.number().nullish(),
+  "tt4": zod.number().nullish(),
+  "wbc": zod.number().nullish(),
+  "lym": zod.number().nullish(),
+  "mono": zod.number().nullish(),
+  "gran": zod.number().nullish(),
+  "lymPercent": zod.number().nullish(),
+  "monPercent": zod.number().nullish(),
+  "graPercent": zod.number().nullish(),
+  "hgb": zod.number().nullish(),
+  "hct": zod.number().nullish(),
+  "rbc": zod.number().nullish(),
+  "mcv": zod.number().nullish(),
+  "mch": zod.number().nullish(),
+  "mchc": zod.number().nullish(),
+  "rdwPercent": zod.number().nullish(),
+  "rdwa": zod.number().nullish(),
+  "plt": zod.number().nullish(),
+  "mpv": zod.number().nullish()
+})
+
+export const patchApiV1CatCareCatsCatIdBloodworkRecordsIdResponse = zod.object({
+  "id": zod.string().uuid(),
+  "catId": zod.string().uuid(),
+  "recordedBy": zod.string().uuid(),
+  "recordedAt": zod.string(),
+  "status": zod.enum(['draft', 'confirmed']),
+  "createdAt": zod.string(),
+  "glu": zod.number().nullish(),
+  "crea": zod.number().nullish(),
+  "bun": zod.number().nullish(),
+  "bunCrea": zod.number().nullish(),
+  "tp": zod.number().nullish(),
+  "alb": zod.number().nullish(),
+  "glob": zod.number().nullish(),
+  "albGlob": zod.number().nullish(),
+  "alt": zod.number().nullish(),
+  "alkp": zod.number().nullish(),
+  "fpl": zod.number().nullish(),
+  "na": zod.number().nullish(),
+  "k": zod.number().nullish(),
+  "naK": zod.number().nullish(),
+  "cl": zod.number().nullish(),
+  "osmCalc": zod.number().nullish(),
+  "tt4": zod.number().nullish(),
+  "wbc": zod.number().nullish(),
+  "lym": zod.number().nullish(),
+  "mono": zod.number().nullish(),
+  "gran": zod.number().nullish(),
+  "lymPercent": zod.number().nullish(),
+  "monPercent": zod.number().nullish(),
+  "graPercent": zod.number().nullish(),
+  "hgb": zod.number().nullish(),
+  "hct": zod.number().nullish(),
+  "rbc": zod.number().nullish(),
+  "mcv": zod.number().nullish(),
+  "mch": zod.number().nullish(),
+  "mchc": zod.number().nullish(),
+  "rdwPercent": zod.number().nullish(),
+  "rdwa": zod.number().nullish(),
+  "plt": zod.number().nullish(),
+  "mpv": zod.number().nullish()
+})
+
+/**
+ * @summary Hard-delete a bloodwork record (only the recording Player may delete)
+ */
+export const deleteApiV1CatCareCatsCatIdBloodworkRecordsIdParams = zod.object({
+  "catId": zod.string().uuid(),
+  "id": zod.string().uuid()
+})
+
+/**
  * @summary List the Players (co-caretakers) currently on a cat (caller must be a member)
  */
 export const getApiV1CatCareCatsCatIdPlayersParams = zod.object({

@@ -28,6 +28,9 @@ import type {
   DeleteApiV1CatCareCatsCatId401,
   DeleteApiV1CatCareCatsCatId403,
   DeleteApiV1CatCareCatsCatId404,
+  DeleteApiV1CatCareCatsCatIdBloodworkRecordsId401,
+  DeleteApiV1CatCareCatsCatIdBloodworkRecordsId403,
+  DeleteApiV1CatCareCatsCatIdBloodworkRecordsId404,
   DeleteApiV1CatCareCatsCatIdBowelMovementsId401,
   DeleteApiV1CatCareCatsCatIdBowelMovementsId403,
   DeleteApiV1CatCareCatsCatIdBowelMovementsId404,
@@ -48,6 +51,11 @@ import type {
   GetApiV1CatCareCatsCatId401,
   GetApiV1CatCareCatsCatId403,
   GetApiV1CatCareCatsCatId404,
+  GetApiV1CatCareCatsCatIdBloodworkRecords200Item,
+  GetApiV1CatCareCatsCatIdBloodworkRecords401,
+  GetApiV1CatCareCatsCatIdBloodworkRecords403,
+  GetApiV1CatCareCatsCatIdBloodworkRecords404,
+  GetApiV1CatCareCatsCatIdBloodworkRecordsParams,
   GetApiV1CatCareCatsCatIdBowelMovements200Item,
   GetApiV1CatCareCatsCatIdBowelMovements401,
   GetApiV1CatCareCatsCatIdBowelMovements403,
@@ -71,6 +79,11 @@ import type {
   PatchApiV1CatCareCatsCatId401,
   PatchApiV1CatCareCatsCatId403,
   PatchApiV1CatCareCatsCatId404,
+  PatchApiV1CatCareCatsCatIdBloodworkRecordsId200,
+  PatchApiV1CatCareCatsCatIdBloodworkRecordsId401,
+  PatchApiV1CatCareCatsCatIdBloodworkRecordsId403,
+  PatchApiV1CatCareCatsCatIdBloodworkRecordsId404,
+  PatchApiV1CatCareCatsCatIdBloodworkRecordsIdBody,
   PatchApiV1CatCareCatsCatIdBody,
   PatchApiV1CatCareCatsCatIdBowelMovementsId200,
   PatchApiV1CatCareCatsCatIdBowelMovementsId401,
@@ -92,6 +105,11 @@ import type {
   PostApiV1CatCareCats401,
   PostApiV1CatCareCats403,
   PostApiV1CatCareCatsBody,
+  PostApiV1CatCareCatsCatIdBloodworkRecords201,
+  PostApiV1CatCareCatsCatIdBloodworkRecords401,
+  PostApiV1CatCareCatsCatIdBloodworkRecords403,
+  PostApiV1CatCareCatsCatIdBloodworkRecords404,
+  PostApiV1CatCareCatsCatIdBloodworkRecordsBody,
   PostApiV1CatCareCatsCatIdBowelMovements201,
   PostApiV1CatCareCatsCatIdBowelMovements401,
   PostApiV1CatCareCatsCatIdBowelMovements403,
@@ -1372,6 +1390,298 @@ export const useDeleteApiV1CatCareCatsCatIdFluidInjectionsId = <TError = ErrorTy
       > => {
 
       const mutationOptions = getDeleteApiV1CatCareCatsCatIdFluidInjectionsIdMutationOptions(options);
+
+      return useMutation(mutationOptions, queryClient);
+    }
+    /**
+ * @summary Manually record a bloodwork report for a cat (always created as confirmed)
+ */
+export const postApiV1CatCareCatsCatIdBloodworkRecords = (
+    catId: string,
+    postApiV1CatCareCatsCatIdBloodworkRecordsBody: PostApiV1CatCareCatsCatIdBloodworkRecordsBody,
+ signal?: AbortSignal
+) => {
+      
+      
+      return customInstance<PostApiV1CatCareCatsCatIdBloodworkRecords201>(
+      {url: `/api/v1/cat-care/cats/${catId}/bloodwork-records`, method: 'POST',
+      headers: {'Content-Type': 'application/json', },
+      data: postApiV1CatCareCatsCatIdBloodworkRecordsBody, signal
+    },
+      );
+    }
+  
+
+
+export const getPostApiV1CatCareCatsCatIdBloodworkRecordsMutationOptions = <TError = ErrorType<PostApiV1CatCareCatsCatIdBloodworkRecords401 | PostApiV1CatCareCatsCatIdBloodworkRecords403 | PostApiV1CatCareCatsCatIdBloodworkRecords404>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postApiV1CatCareCatsCatIdBloodworkRecords>>, TError,{catId: string;data: PostApiV1CatCareCatsCatIdBloodworkRecordsBody}, TContext>, }
+): UseMutationOptions<Awaited<ReturnType<typeof postApiV1CatCareCatsCatIdBloodworkRecords>>, TError,{catId: string;data: PostApiV1CatCareCatsCatIdBloodworkRecordsBody}, TContext> => {
+
+const mutationKey = ['postApiV1CatCareCatsCatIdBloodworkRecords'];
+const {mutation: mutationOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }};
+
+      
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof postApiV1CatCareCatsCatIdBloodworkRecords>>, {catId: string;data: PostApiV1CatCareCatsCatIdBloodworkRecordsBody}> = (props) => {
+          const {catId,data} = props ?? {};
+
+          return  postApiV1CatCareCatsCatIdBloodworkRecords(catId,data,)
+        }
+
+        
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type PostApiV1CatCareCatsCatIdBloodworkRecordsMutationResult = NonNullable<Awaited<ReturnType<typeof postApiV1CatCareCatsCatIdBloodworkRecords>>>
+    export type PostApiV1CatCareCatsCatIdBloodworkRecordsMutationBody = PostApiV1CatCareCatsCatIdBloodworkRecordsBody
+    export type PostApiV1CatCareCatsCatIdBloodworkRecordsMutationError = ErrorType<PostApiV1CatCareCatsCatIdBloodworkRecords401 | PostApiV1CatCareCatsCatIdBloodworkRecords403 | PostApiV1CatCareCatsCatIdBloodworkRecords404>
+
+    /**
+ * @summary Manually record a bloodwork report for a cat (always created as confirmed)
+ */
+export const usePostApiV1CatCareCatsCatIdBloodworkRecords = <TError = ErrorType<PostApiV1CatCareCatsCatIdBloodworkRecords401 | PostApiV1CatCareCatsCatIdBloodworkRecords403 | PostApiV1CatCareCatsCatIdBloodworkRecords404>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postApiV1CatCareCatsCatIdBloodworkRecords>>, TError,{catId: string;data: PostApiV1CatCareCatsCatIdBloodworkRecordsBody}, TContext>, }
+ , queryClient?: QueryClient): UseMutationResult<
+        Awaited<ReturnType<typeof postApiV1CatCareCatsCatIdBloodworkRecords>>,
+        TError,
+        {catId: string;data: PostApiV1CatCareCatsCatIdBloodworkRecordsBody},
+        TContext
+      > => {
+
+      const mutationOptions = getPostApiV1CatCareCatsCatIdBloodworkRecordsMutationOptions(options);
+
+      return useMutation(mutationOptions, queryClient);
+    }
+    /**
+ * @summary List bloodwork records for a cat (optionally filtered by ?from=&to= date range)
+ */
+export const getApiV1CatCareCatsCatIdBloodworkRecords = (
+    catId: string,
+    params?: GetApiV1CatCareCatsCatIdBloodworkRecordsParams,
+ signal?: AbortSignal
+) => {
+      
+      
+      return customInstance<GetApiV1CatCareCatsCatIdBloodworkRecords200Item[]>(
+      {url: `/api/v1/cat-care/cats/${catId}/bloodwork-records`, method: 'GET',
+        params, signal
+    },
+      );
+    }
+  
+
+
+
+export const getGetApiV1CatCareCatsCatIdBloodworkRecordsQueryKey = (catId?: string,
+    params?: GetApiV1CatCareCatsCatIdBloodworkRecordsParams,) => {
+    return [
+    `/api/v1/cat-care/cats/${catId}/bloodwork-records`, ...(params ? [params]: [])
+    ] as const;
+    }
+
+    
+export const getGetApiV1CatCareCatsCatIdBloodworkRecordsQueryOptions = <TData = Awaited<ReturnType<typeof getApiV1CatCareCatsCatIdBloodworkRecords>>, TError = ErrorType<GetApiV1CatCareCatsCatIdBloodworkRecords401 | GetApiV1CatCareCatsCatIdBloodworkRecords403 | GetApiV1CatCareCatsCatIdBloodworkRecords404>>(catId: string,
+    params?: GetApiV1CatCareCatsCatIdBloodworkRecordsParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getApiV1CatCareCatsCatIdBloodworkRecords>>, TError, TData>>, }
+) => {
+
+const {query: queryOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getGetApiV1CatCareCatsCatIdBloodworkRecordsQueryKey(catId,params);
+
+  
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof getApiV1CatCareCatsCatIdBloodworkRecords>>> = ({ signal }) => getApiV1CatCareCatsCatIdBloodworkRecords(catId,params, signal);
+
+      
+
+      
+
+   return  { queryKey, queryFn, enabled: !!(catId), ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof getApiV1CatCareCatsCatIdBloodworkRecords>>, TError, TData> & { queryKey: DataTag<QueryKey, TData> }
+}
+
+export type GetApiV1CatCareCatsCatIdBloodworkRecordsQueryResult = NonNullable<Awaited<ReturnType<typeof getApiV1CatCareCatsCatIdBloodworkRecords>>>
+export type GetApiV1CatCareCatsCatIdBloodworkRecordsQueryError = ErrorType<GetApiV1CatCareCatsCatIdBloodworkRecords401 | GetApiV1CatCareCatsCatIdBloodworkRecords403 | GetApiV1CatCareCatsCatIdBloodworkRecords404>
+
+
+export function useGetApiV1CatCareCatsCatIdBloodworkRecords<TData = Awaited<ReturnType<typeof getApiV1CatCareCatsCatIdBloodworkRecords>>, TError = ErrorType<GetApiV1CatCareCatsCatIdBloodworkRecords401 | GetApiV1CatCareCatsCatIdBloodworkRecords403 | GetApiV1CatCareCatsCatIdBloodworkRecords404>>(
+ catId: string,
+    params: undefined |  GetApiV1CatCareCatsCatIdBloodworkRecordsParams, options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof getApiV1CatCareCatsCatIdBloodworkRecords>>, TError, TData>> & Pick<
+        DefinedInitialDataOptions<
+          Awaited<ReturnType<typeof getApiV1CatCareCatsCatIdBloodworkRecords>>,
+          TError,
+          Awaited<ReturnType<typeof getApiV1CatCareCatsCatIdBloodworkRecords>>
+        > , 'initialData'
+      >, }
+ , queryClient?: QueryClient
+  ):  DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData> }
+export function useGetApiV1CatCareCatsCatIdBloodworkRecords<TData = Awaited<ReturnType<typeof getApiV1CatCareCatsCatIdBloodworkRecords>>, TError = ErrorType<GetApiV1CatCareCatsCatIdBloodworkRecords401 | GetApiV1CatCareCatsCatIdBloodworkRecords403 | GetApiV1CatCareCatsCatIdBloodworkRecords404>>(
+ catId: string,
+    params?: GetApiV1CatCareCatsCatIdBloodworkRecordsParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getApiV1CatCareCatsCatIdBloodworkRecords>>, TError, TData>> & Pick<
+        UndefinedInitialDataOptions<
+          Awaited<ReturnType<typeof getApiV1CatCareCatsCatIdBloodworkRecords>>,
+          TError,
+          Awaited<ReturnType<typeof getApiV1CatCareCatsCatIdBloodworkRecords>>
+        > , 'initialData'
+      >, }
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData> }
+export function useGetApiV1CatCareCatsCatIdBloodworkRecords<TData = Awaited<ReturnType<typeof getApiV1CatCareCatsCatIdBloodworkRecords>>, TError = ErrorType<GetApiV1CatCareCatsCatIdBloodworkRecords401 | GetApiV1CatCareCatsCatIdBloodworkRecords403 | GetApiV1CatCareCatsCatIdBloodworkRecords404>>(
+ catId: string,
+    params?: GetApiV1CatCareCatsCatIdBloodworkRecordsParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getApiV1CatCareCatsCatIdBloodworkRecords>>, TError, TData>>, }
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData> }
+/**
+ * @summary List bloodwork records for a cat (optionally filtered by ?from=&to= date range)
+ */
+
+export function useGetApiV1CatCareCatsCatIdBloodworkRecords<TData = Awaited<ReturnType<typeof getApiV1CatCareCatsCatIdBloodworkRecords>>, TError = ErrorType<GetApiV1CatCareCatsCatIdBloodworkRecords401 | GetApiV1CatCareCatsCatIdBloodworkRecords403 | GetApiV1CatCareCatsCatIdBloodworkRecords404>>(
+ catId: string,
+    params?: GetApiV1CatCareCatsCatIdBloodworkRecordsParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getApiV1CatCareCatsCatIdBloodworkRecords>>, TError, TData>>, }
+ , queryClient?: QueryClient 
+ ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData> } {
+
+  const queryOptions = getGetApiV1CatCareCatsCatIdBloodworkRecordsQueryOptions(catId,params,options)
+
+  const query = useQuery(queryOptions, queryClient) as  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData> };
+
+  query.queryKey = queryOptions.queryKey ;
+
+  return query;
+}
+
+
+
+
+/**
+ * @summary Edit a bloodwork record's fields (only the recording Player may edit)
+ */
+export const patchApiV1CatCareCatsCatIdBloodworkRecordsId = (
+    catId: string,
+    id: string,
+    patchApiV1CatCareCatsCatIdBloodworkRecordsIdBody: PatchApiV1CatCareCatsCatIdBloodworkRecordsIdBody,
+ ) => {
+      
+      
+      return customInstance<PatchApiV1CatCareCatsCatIdBloodworkRecordsId200>(
+      {url: `/api/v1/cat-care/cats/${catId}/bloodwork-records/${id}`, method: 'PATCH',
+      headers: {'Content-Type': 'application/json', },
+      data: patchApiV1CatCareCatsCatIdBloodworkRecordsIdBody
+    },
+      );
+    }
+  
+
+
+export const getPatchApiV1CatCareCatsCatIdBloodworkRecordsIdMutationOptions = <TError = ErrorType<PatchApiV1CatCareCatsCatIdBloodworkRecordsId401 | PatchApiV1CatCareCatsCatIdBloodworkRecordsId403 | PatchApiV1CatCareCatsCatIdBloodworkRecordsId404>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof patchApiV1CatCareCatsCatIdBloodworkRecordsId>>, TError,{catId: string;id: string;data: PatchApiV1CatCareCatsCatIdBloodworkRecordsIdBody}, TContext>, }
+): UseMutationOptions<Awaited<ReturnType<typeof patchApiV1CatCareCatsCatIdBloodworkRecordsId>>, TError,{catId: string;id: string;data: PatchApiV1CatCareCatsCatIdBloodworkRecordsIdBody}, TContext> => {
+
+const mutationKey = ['patchApiV1CatCareCatsCatIdBloodworkRecordsId'];
+const {mutation: mutationOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }};
+
+      
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof patchApiV1CatCareCatsCatIdBloodworkRecordsId>>, {catId: string;id: string;data: PatchApiV1CatCareCatsCatIdBloodworkRecordsIdBody}> = (props) => {
+          const {catId,id,data} = props ?? {};
+
+          return  patchApiV1CatCareCatsCatIdBloodworkRecordsId(catId,id,data,)
+        }
+
+        
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type PatchApiV1CatCareCatsCatIdBloodworkRecordsIdMutationResult = NonNullable<Awaited<ReturnType<typeof patchApiV1CatCareCatsCatIdBloodworkRecordsId>>>
+    export type PatchApiV1CatCareCatsCatIdBloodworkRecordsIdMutationBody = PatchApiV1CatCareCatsCatIdBloodworkRecordsIdBody
+    export type PatchApiV1CatCareCatsCatIdBloodworkRecordsIdMutationError = ErrorType<PatchApiV1CatCareCatsCatIdBloodworkRecordsId401 | PatchApiV1CatCareCatsCatIdBloodworkRecordsId403 | PatchApiV1CatCareCatsCatIdBloodworkRecordsId404>
+
+    /**
+ * @summary Edit a bloodwork record's fields (only the recording Player may edit)
+ */
+export const usePatchApiV1CatCareCatsCatIdBloodworkRecordsId = <TError = ErrorType<PatchApiV1CatCareCatsCatIdBloodworkRecordsId401 | PatchApiV1CatCareCatsCatIdBloodworkRecordsId403 | PatchApiV1CatCareCatsCatIdBloodworkRecordsId404>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof patchApiV1CatCareCatsCatIdBloodworkRecordsId>>, TError,{catId: string;id: string;data: PatchApiV1CatCareCatsCatIdBloodworkRecordsIdBody}, TContext>, }
+ , queryClient?: QueryClient): UseMutationResult<
+        Awaited<ReturnType<typeof patchApiV1CatCareCatsCatIdBloodworkRecordsId>>,
+        TError,
+        {catId: string;id: string;data: PatchApiV1CatCareCatsCatIdBloodworkRecordsIdBody},
+        TContext
+      > => {
+
+      const mutationOptions = getPatchApiV1CatCareCatsCatIdBloodworkRecordsIdMutationOptions(options);
+
+      return useMutation(mutationOptions, queryClient);
+    }
+    /**
+ * @summary Hard-delete a bloodwork record (only the recording Player may delete)
+ */
+export const deleteApiV1CatCareCatsCatIdBloodworkRecordsId = (
+    catId: string,
+    id: string,
+ ) => {
+      
+      
+      return customInstance<void>(
+      {url: `/api/v1/cat-care/cats/${catId}/bloodwork-records/${id}`, method: 'DELETE'
+    },
+      );
+    }
+  
+
+
+export const getDeleteApiV1CatCareCatsCatIdBloodworkRecordsIdMutationOptions = <TError = ErrorType<DeleteApiV1CatCareCatsCatIdBloodworkRecordsId401 | DeleteApiV1CatCareCatsCatIdBloodworkRecordsId403 | DeleteApiV1CatCareCatsCatIdBloodworkRecordsId404>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deleteApiV1CatCareCatsCatIdBloodworkRecordsId>>, TError,{catId: string;id: string}, TContext>, }
+): UseMutationOptions<Awaited<ReturnType<typeof deleteApiV1CatCareCatsCatIdBloodworkRecordsId>>, TError,{catId: string;id: string}, TContext> => {
+
+const mutationKey = ['deleteApiV1CatCareCatsCatIdBloodworkRecordsId'];
+const {mutation: mutationOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }};
+
+      
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof deleteApiV1CatCareCatsCatIdBloodworkRecordsId>>, {catId: string;id: string}> = (props) => {
+          const {catId,id} = props ?? {};
+
+          return  deleteApiV1CatCareCatsCatIdBloodworkRecordsId(catId,id,)
+        }
+
+        
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type DeleteApiV1CatCareCatsCatIdBloodworkRecordsIdMutationResult = NonNullable<Awaited<ReturnType<typeof deleteApiV1CatCareCatsCatIdBloodworkRecordsId>>>
+    
+    export type DeleteApiV1CatCareCatsCatIdBloodworkRecordsIdMutationError = ErrorType<DeleteApiV1CatCareCatsCatIdBloodworkRecordsId401 | DeleteApiV1CatCareCatsCatIdBloodworkRecordsId403 | DeleteApiV1CatCareCatsCatIdBloodworkRecordsId404>
+
+    /**
+ * @summary Hard-delete a bloodwork record (only the recording Player may delete)
+ */
+export const useDeleteApiV1CatCareCatsCatIdBloodworkRecordsId = <TError = ErrorType<DeleteApiV1CatCareCatsCatIdBloodworkRecordsId401 | DeleteApiV1CatCareCatsCatIdBloodworkRecordsId403 | DeleteApiV1CatCareCatsCatIdBloodworkRecordsId404>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deleteApiV1CatCareCatsCatIdBloodworkRecordsId>>, TError,{catId: string;id: string}, TContext>, }
+ , queryClient?: QueryClient): UseMutationResult<
+        Awaited<ReturnType<typeof deleteApiV1CatCareCatsCatIdBloodworkRecordsId>>,
+        TError,
+        {catId: string;id: string},
+        TContext
+      > => {
+
+      const mutationOptions = getDeleteApiV1CatCareCatsCatIdBloodworkRecordsIdMutationOptions(options);
 
       return useMutation(mutationOptions, queryClient);
     }

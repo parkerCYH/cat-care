@@ -5,6 +5,7 @@ import { Home } from '@/pages/Home';
 import { BowelNew } from '@/pages/BowelNew';
 import { WeightNew } from '@/pages/WeightNew';
 import { FluidInjectionNew } from '@/pages/FluidInjectionNew';
+import { BloodworkNew } from '@/pages/BloodworkNew';
 import { Login } from '@/pages/Login';
 import { AuthCallback } from '@/pages/AuthCallback';
 import { NotFound } from '@/pages/NotFound';
@@ -19,6 +20,7 @@ import { WeightEditPage } from '@/pages/weight/WeightEditPage';
 import { FluidInjectionTable } from '@/pages/fluidInjection/FluidInjectionTable';
 import { FluidInjectionDetail } from '@/pages/fluidInjection/FluidInjectionDetail';
 import { FluidInjectionEdit } from '@/pages/fluidInjection/FluidInjectionEdit';
+import { BloodworkDetail } from '@/pages/bloodwork/BloodworkDetail';
 import { CatsList } from '@/pages/cats/CatsList';
 import { CatDetail } from '@/pages/cats/CatDetail';
 import { CatNew } from '@/pages/cats/CatNew';
@@ -64,6 +66,11 @@ export const router = createBrowserRouter([
       {
         path: '/fluid-injection/new',
         element: <FluidInjectionNew />,
+      },
+      // 票 19 — 手動填寫驗血紀錄(比照原型 VariantA 的手動填寫分支,不含拍照辨識,見票 21)
+      {
+        path: '/bloodwork/new',
+        element: <BloodworkNew />,
       },
       // Issue #7 (排便歷史規格): calendar is the default view, table is the filterable
       // list view; both are top-level siblings, detail/edit are reached from within.
@@ -112,6 +119,10 @@ export const router = createBrowserRouter([
       {
         path: '/fluid-injection/:id/edit',
         element: <FluidInjectionEdit />,
+      },
+      {
+        path: '/bloodwork/:id',
+        element: <BloodworkDetail />,
       },
       // issue #9 — cat management (list/detail/create/edit + player invite/leave/chip-
       // custodian transfer). See docs/agents/init-frontend.md for the multi-agent build

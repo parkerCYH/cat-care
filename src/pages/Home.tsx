@@ -105,6 +105,14 @@ function HomeContent({
         >
           記一筆點滴
         </Link>
+
+        {/* 票 19 — 手動填寫驗血報告(拍照辨識入口留給票 21) */}
+        <Link
+          to="/bloodwork/new"
+          className="flex min-h-[72px] w-full items-center rounded-xl border border-gray-900 px-5 py-4 text-lg font-semibold text-gray-900"
+        >
+          ✍️ 手動填寫驗血報告
+        </Link>
       </div>
 
       <div className="flex flex-col gap-3">
