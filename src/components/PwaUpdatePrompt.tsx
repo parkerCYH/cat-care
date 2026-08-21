@@ -5,6 +5,10 @@ import { useRegisterSW } from 'virtual:pwa-register/react';
  * 票 01 定案:偵測到新版本時彈提示,由使用者自己選重整時機,不靜默自動重整(避免中斷表單填寫)。
  * `onOfflineReady` 保持沉默——Phase 0 scope 沒有離線功能訴求,提示會製造不存在的期待。
  */
+
+// 票 03:正常路徑下 controllerchange → reload 應在 1 秒內完成,8 秒是寬鬆上限。
+const UPDATE_TIMEOUT_MS = 8000;
+
 export function PwaUpdatePrompt() {
   const [updating, setUpdating] = useState(false);
   const {
@@ -16,6 +20,17 @@ export function PwaUpdatePrompt() {
 
   const handleUpdate = () => {
     setUpdating(true);
+
+    // 票 03:iOS Safari standalone 模式下 controllerchange 有時不觸發,導致按鈕永久卡在
+    // 「更新中…」。到期強制 reload 作為 fallback——使用者已主動點擊過一次,這不是新增未經同意的
+    // 自動重整,只是確保這次點擊真的有結果。
+    const timeoutId = window.setTimeout(() => window.location.reload(), UPDATE_TIMEOUT_MS);
+    navigator.serviceWorker.addEventListener(
+      'controllerchange',
+      () => window.clearTimeout(timeoutId),
+      { once: true },
+    );
+
     updateServiceWorker(true);
   };
 
